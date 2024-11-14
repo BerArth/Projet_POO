@@ -20,16 +20,11 @@ public class DoorWithKey extends AutoLockDoor {
     }
 
     public void unlock(Key k){
-        if(k instanceof KeyPart){
-            System.out.println("Its key part, we need a key for unlock this door");
-        }else{
-            if(getKeyDoorNb() == k.getKeyNB()){
-                super.unlock();
-            }else {
-                System.out.println("Ce n'est pas la bonne clé");
-            }
+        if (getKeyDoorNb() == k.getKeyNB()) {
+            super.unlock();
+        } else {
+            System.out.println("Ce n'est pas la bonne clé");
         }
-
     }
 
     @Override
