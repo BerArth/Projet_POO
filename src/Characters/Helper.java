@@ -1,8 +1,9 @@
-package Caracteres;
+package Characters;
 
-public class Helper extends Caractere {
+public class Helper extends Character {
 
     private final int loc;
+
 
     public Helper(String name, int loc){
         super(name, 100, 20);

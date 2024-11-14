@@ -10,8 +10,8 @@ public class Flacon extends Item{
         super(name);
     }
 
-    public void set_isFull(boolean full) {
-        isFull = true;
+    public void set_isFull() {
+        this.isFull = true;
     }
 
     public boolean get_IsFull() {
