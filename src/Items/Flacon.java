@@ -1,5 +1,6 @@
-import java.util.Random;
+package Items;
 
+import java.util.Random;
 public class Flacon extends Item{
 
 

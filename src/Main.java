@@ -1,11 +1,13 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Caracteres.*;
+import Items.*;
+
 public class Main {
     public static void main(String[] args) {
 
-        Helper h1 = new Helper("claire");
+        Helper h1 = new Helper("Saje", 0);
+        Helper h2 = new Helper("Ivrogne", 1);
         h1.speek();
-        System.out.printf("Hello and welcome!");
+        h2.speek();
 
 
     }

@@ -1,3 +1,4 @@
+package Items;
 import java.util.Random;
 
 public class Net extends Item{
