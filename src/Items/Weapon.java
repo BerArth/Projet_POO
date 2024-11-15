@@ -1,21 +1,20 @@
 package Items;
 import Characters.Character;
-import Characters.Helper;
 
 public class Weapon extends Item {
 
-    private int Damage;
+    private int damage;
 
-    public Weapon(String name, int damage) {
-        super(name);
-        this.Damage = damage;
+    public Weapon(String name, int weight, int damage) {
+        super(name, weight);
+        this.damage = damage;
     }
 
     public int getDamage() {
-        return this.Damage;
+        return this.damage;
     }
     public void setDamage(int damage) {
-        this.Damage = damage;
+        this.damage = damage;
     }
 
 
@@ -24,9 +23,9 @@ public class Weapon extends Item {
             System.out.println("You're trying to attack a defenseless character.");
             // scanner demande utilisateur pour le tuer quand même ?
         }else{
-            character.attack(this.Damage);
+            character.attack(this.damage);
         }*/
-        character.takeDamage(this.Damage);
+        character.reducePv(this.damage);
     }
 
 }

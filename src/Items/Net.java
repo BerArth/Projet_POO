@@ -5,8 +5,8 @@ public class Net extends Item{
 
     //Filet pour luciole
 
-    public Net(String name){
-        super(name);
+    public Net(String name, int weight) {
+        super(name, weight);
     }
 
     public boolean Catch(){
