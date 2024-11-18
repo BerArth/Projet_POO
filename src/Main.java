@@ -1,7 +1,5 @@
 import Characters.*;
-import Items.Bag;
-import Items.Food;
-import Items.Weapon;
+import Items.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,12 +14,16 @@ public class Main {
         Weapon w1 = new Weapon("Sword",40, 50);
         Food food = new Food("Potato",5, 10);
         Bag bag = new Bag("Bag", 10);
+        Net net = new Net("Net", 5);
+        Flacon flacon = new Flacon("Flacon", 5);
 
         h1.printStateHp();    // 100
         w1.attack(h1);
         h1.printStateHp();    // 50
-        food.heal(h1);  // voir pour maxHP ?
+        food.heal(h1);          //  maxHP ?
         h1.printStateHp();    // 60
+        net.Catch(null);
+        net.Catch(flacon);
 
 
     }
