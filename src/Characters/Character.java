@@ -6,7 +6,6 @@ public abstract class Character {
     protected int hp;
     protected int strength;
 
-
     public Character(String name, int hp, int strength) {
         this.NAME = name;
         this.hp = hp;
@@ -18,6 +17,9 @@ public abstract class Character {
     }
     public void setHp(int hp) { this.hp = hp; }
     public String getNAME() { return this.NAME; }
+    public int getStrength(){
+        return this.strength;
+    }
 
     abstract public void speek();
 
@@ -26,6 +28,21 @@ public abstract class Character {
             this.hp -= damage;
         }else{
             System.out.println("The target is already dead.");
+        }
+    }
+
+    public boolean isDead(){
+        return (this.getHp() <= 0);
+    }
+
+    public void attack(Character target){
+        if(!isDead()){
+            target.reducePv(this.getStrength());
+            if(target.getHp() <= 0){
+                System.out.println("The target is dead.");
+            }else {
+                System.out.println("The target take " + this.getStrength() + " damage.");
+            }
         }
     }
 

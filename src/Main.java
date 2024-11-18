@@ -4,11 +4,16 @@ import Items.*;
 public class Main {
     public static void main(String[] args) {
 
+        //test characters
         Helper h1 = new Helper("Saje", 0);
         Helper h2 = new Helper("Ivrogne", 1);
         Hero hero = new Hero("Michel");
         h1.speek();
         h2.speek();
+
+        Boss boss = new Boss("Contre-Maitre");
+        boss.attack(hero);
+        hero.printStateHp();
 
         //test item
         Weapon w1 = new Weapon("Sword",40, 50);
