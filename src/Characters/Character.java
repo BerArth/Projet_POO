@@ -1,5 +1,8 @@
 package Characters;
 
+import java.sql.SQLOutput;
+import java.util.Objects;
+
 public abstract class Character {
 
     protected final String NAME;
@@ -60,6 +63,14 @@ public abstract class Character {
 
     public void printStateHp(){
         System.out.println(this.NAME +" have: " + this.hp + " HP.\n");
+    }
+
+    public void giveClue(Character speeker){
+        if(speeker instanceof Helper){
+            if(Objects.equals(speeker.getNAME(), "Saje")){
+                System.out.println(this.getNAME() + " says : I'll give you a clue");
+            }
+        }
     }
 
 }

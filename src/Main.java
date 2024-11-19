@@ -1,10 +1,19 @@
 import Characters.*;
+import Doors.Door;
+import Doors.DoorWithKey;
 import Items.*;
+import Locations.Exit;
+import Locations.Room;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        //test characters
+        Scanner scanner = new Scanner(System.in);
+
+        //test characterse
+
         Helper h1 = new Helper("Saje", 0);
         Helper h2 = new Helper("Ivrogne", 1);
         Hero hero = new Hero("Michel");
@@ -14,6 +23,9 @@ public class Main {
         Boss boss = new Boss("Contre-Maitre");
         boss.attack(hero);
         hero.printStateHp();
+        h1.attack(boss);
+        h1.giveClue(h1);
+        hero.giveClue(hero);
 
         //test item
         Weapon w1 = new Weapon("Sword",40, 50);
@@ -27,9 +39,101 @@ public class Main {
         h1.printStateHp();    // 50
         food.heal(h1);          //  maxHP ?
         h1.printStateHp();    // 60
-        net.Catch(null);
-        net.Catch(flacon);
+//        net.Catch(null);
+//        net.Catch(flacon);
 
+        //test des rooms
 
+        KeyPart kp1 = new KeyPart(5);
+        KeyPart kp2 = new KeyPart(7);
+        Key k = new Key(kp1, kp2);
+
+        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", false);
+        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", false);
+
+        DoorWithKey door2forest = new DoorWithKey(12);
+        Door door2clairiere = new Door();
+
+        Exit exit2forest = new Exit("forest", forest, door2forest);
+        Exit forest2stratRoom = new Exit("clairiere", startRoom, door2clairiere);
+
+        startRoom.addExit(exit2forest);
+        forest.addExit(forest2stratRoom);
+
+        Room currentRoom = startRoom;
+
+        System.out.println("Bienvenue dans l'aventure !");
+        System.out.println("Commandes : GO [direction], UNLOCK [direction], OPEN [direction], HELP, QUIT");
+
+        while(true) {
+            System.out.println(currentRoom.getDescription());
+
+            System.out.println("Sorties disponibles :");
+            for (String direction : currentRoom.getExits().keySet())
+            {
+                Exit exit = currentRoom.getExits().get(direction);
+                System.out.println("- " + direction + ": " + exit.getDoor());
+            }
+
+            System.out.print("> ");
+            String command = scanner.nextLine().trim().toUpperCase();
+
+            if (command.equals("QUIT")) {
+                System.out.println("Merci d'avoir joué !");
+                break;
+            }
+            else if(command.startsWith("GO "))
+            {
+                String direction = command.substring(3).toLowerCase();
+                Exit exit = currentRoom.getExit(direction);
+
+                System.out.println(direction);
+
+                if(exit != null)
+                {
+                    if(!exit.getDoor().isOpen())
+                    {
+                        System.out.println("Cette porte est fermé");
+                    }
+                    else
+                    {
+                        currentRoom = exit.getDirection();
+                    }
+                }
+                else
+                {
+                    System.out.println("Il n'y a pas de sortie dans cette direction");
+                }
+            }
+            else if(command.startsWith("UNLOCK "))
+            {
+                String direction = command.substring(7).toLowerCase();
+                Exit exit = currentRoom.getExit(direction);
+
+                if (exit == null)
+                {
+                    System.out.println("Il n'y a pas de porte dans cette direction !");
+                }
+                else if (exit.getDoor() instanceof DoorWithKey keyDoor)
+                {
+                    keyDoor.unlock(k);
+                }
+                else
+                {
+                    System.out.println("Pas besoins de clé");
+                }
+            }
+            else if(command.startsWith("OPEN "))
+            {
+                String direction = command.substring(5).toLowerCase();
+                Exit exit = currentRoom.getExit(direction);
+
+                if (exit == null) {
+                    System.out.println("Il n'y a pas de porte dans cette direction !");
+                } else {
+                    exit.getDoor().open();
+                }
+            }
+        }
     }
 }
