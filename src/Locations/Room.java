@@ -1,5 +1,8 @@
 package Locations;
 
+import Characters.*;
+import Characters.Character;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,13 +11,13 @@ public class Room {
     private final String NAME;
     private final String description;
     private Map<String, Exit> exits;
-    public final boolean HAVE_BOSS;
+    private Character chara;
 
-    public Room(String name, String description, boolean haveBoss) {
+    public Room(String name, String description, Character chara) {
         this.NAME = name;
         this.description = description;
-        this.HAVE_BOSS = haveBoss;
         this.exits = new HashMap<String, Exit>();
+        this.chara = chara;
     }
 
     public void addExit(Exit exit) {

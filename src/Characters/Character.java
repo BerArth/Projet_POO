@@ -8,11 +8,13 @@ public abstract class Character {
     protected final String NAME;
     protected int hp;
     protected int strength;
+    protected final String SPEACH;
 
-    public Character(String name, int hp, int strength) {
+    public Character(String name, int hp, int strength, String speach) {
         this.NAME = name;
         this.hp = hp;
         this.strength = strength;
+        this.SPEACH = speach;
     }
 
     public int getHp() {
@@ -24,7 +26,10 @@ public abstract class Character {
         return this.strength;
     }
 
-    abstract public void speek();
+    public void speek(){
+        System.out.println(SPEACH);
+    }
+
 
     public void reducePv(int damage){
         if(this.hp > 0){

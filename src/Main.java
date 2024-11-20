@@ -14,13 +14,13 @@ public class Main {
 
         //test characterse
 
-        Helper h1 = new Helper("Saje", 0);
-        Helper h2 = new Helper("Ivrogne", 1);
-        Hero hero = new Hero("Michel");
+        Helper h1 = new Helper("Sage", "Hello im Sage");
+        Helper h2 = new Helper("Ivrogne", "Hello im ivrogne");
+        Hero hero = new Hero("Michel", "hello michel");
         h1.speek();
         h2.speek();
 
-        Boss boss = new Boss("Contre-Maitre");
+        Boss boss = new Boss("Contre-Maitre", "hello contre-maitre");
         boss.attack(hero);
         hero.printStateHp();
         h1.attack(boss);
@@ -48,8 +48,8 @@ public class Main {
         KeyPart kp2 = new KeyPart(7);
         Key k = new Key(kp1, kp2);
 
-        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", false);
-        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", false);
+        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", null);
+        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", null);
 
         DoorWithKey door2forest = new DoorWithKey(12);
         Door door2clairiere = new Door();

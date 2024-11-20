@@ -6,8 +6,8 @@ public class Hero extends Character {
 
     private Bag bag;
 
-    public Hero(String name){
-        super(name, 100, 20);
+    public Hero(String name, String speach){
+        super(name, 100, 20, speach);
         this.bag = null;
     }
 
@@ -19,7 +19,5 @@ public class Hero extends Character {
         this.bag = bag;
     }
 
-    @Override
-    public void speek() {
-    }
+
 }
