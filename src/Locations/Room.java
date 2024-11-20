@@ -1,10 +1,13 @@
 package Locations;
 
-import Characters.*;
 import Characters.Character;
+import Items.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+
 
 public class Room {
 
@@ -12,12 +15,14 @@ public class Room {
     private final String description;
     private Map<String, Exit> exits;
     private Character chara;
+    private List<Item> items;
 
-    public Room(String name, String description, Character chara) {
+    public Room(String name, String description, Character chara, List<Item> items) {
         this.NAME = name;
         this.description = description;
         this.exits = new HashMap<String, Exit>();
         this.chara = chara;
+        this.items = items;
     }
 
     public void addExit(Exit exit) {
@@ -34,6 +39,24 @@ public class Room {
 
     public String getDescription() {
         return description;
+    }
+
+    public Character getChara() {
+        return chara;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void printItems(){
+        for(Item item : items){
+            item.printName();
+        }
+    }
+
+    public void removeItem(Item item){
+        items.remove(item);
     }
 
 }

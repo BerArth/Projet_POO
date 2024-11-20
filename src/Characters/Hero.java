@@ -1,6 +1,11 @@
 package Characters;
 
 import Items.Bag;
+import Items.Item;
+import Locations.Room;
+
+import java.util.List;
+import java.util.Objects;
 
 public class Hero extends Character {
 
@@ -42,4 +47,19 @@ public class Hero extends Character {
     public void printGold(){
         System.out.println("You have " + this.gold + " gold.");
     }
+
+    public void takeItem(Room room, String nameItem){
+        List<Item> items = room.getItems();
+
+        for(Item item : items){
+            if(Objects.equals(item.getName(), nameItem)){
+                this.getBag().addItem(item);
+                items.remove(item);
+                break;
+            }else{
+                System.out.println("This room dont have this item.");
+            }
+        }
+    }
+
 }

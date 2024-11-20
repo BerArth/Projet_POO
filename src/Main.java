@@ -4,6 +4,9 @@ import Doors.DoorWithKey;
 import Items.*;
 import Locations.Exit;
 import Locations.Room;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.Scanner;
 
@@ -30,11 +33,13 @@ public class Main {
 
         System.out.println("***********************************************");
 
+        KeyPart keypartforest = new KeyPart(1);
+
         //test echange et achat
 //        hero.getBag().addItem(new KeyPart(1));
-//        hero.getBag().addItem(new KeyPart(2));
-//        hero.getBag().addItem(new KeyPart(3));
-//        hero.getBag().addItem(new KeyPart(4));
+        hero.getBag().addItem(new KeyPart(2));
+        hero.getBag().addItem(new KeyPart(3));
+        hero.getBag().addItem(new KeyPart(4));
 
         System.out.println("Bag inventory before exchange :");
         hero.getBag().printItems();
@@ -70,8 +75,11 @@ public class Main {
 //        net.Catch(flacon);
 
         //test des rooms
-        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", null);
-        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", null);
+        List<Item> itemsR1 = new ArrayList<>();
+        itemsR1.add(keypartforest);
+
+        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", null, itemsR1);
+        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", null, null);
 
 
         Set<Integer> requiredParts = Set.of(1,2,3,4);
@@ -87,29 +95,42 @@ public class Main {
         Room currentRoom = startRoom;
 
         System.out.println("Bienvenue dans l'aventure !");
-        System.out.println("Commandes : GO [direction], UNLOCK [direction], OPEN [direction], HELP, QUIT");
-
+        System.out.println("Commandes : GO [direction], UNLOCK [direction], OPEN [direction], HELP, QUIT, INVENTORY, LOOK");
+        System.out.println(currentRoom.getDescription());
 
         while(true) {
-            System.out.println(currentRoom.getDescription());
-
-            System.out.println("Sorties disponibles :");
-            for (String direction : currentRoom.getExits().keySet())
-            {
-                Exit exit = currentRoom.getExits().get(direction);
-                System.out.println("- " + direction + ": " + exit.getDoor());
-            }
 
             System.out.print("> ");
-            String command = scanner.nextLine().trim().toUpperCase();
-
-            if(command.equals("INVENTORY")) {
-                hero.getBag().printItems();
-            }
+            String command = scanner.nextLine().trim();
 
             if (command.equals("QUIT")) {
                 System.out.println("Merci d'avoir joué !");
                 break;
+            }
+
+            if(command.equals("LOOK")){
+                System.out.println(currentRoom.getDescription());
+                if(currentRoom.getItems() != null){
+                    System.out.println("Item in this room : ");
+                    currentRoom.printItems();
+                }
+                System.out.println("Sorties disponibles :");
+                for (String direction : currentRoom.getExits().keySet())
+                {
+                    Exit exit = currentRoom.getExits().get(direction);
+                    System.out.println("- " + direction + ": " + exit.getDoor());
+                }
+
+            }
+
+            if(command.startsWith("TAKE ")){
+                String item = command.substring(5);
+                System.out.println(item);
+                hero.takeItem(currentRoom, item);
+            }
+
+            if(command.equals("INVENTORY")) {
+                hero.getBag().printItems();
             }
             else if(command.startsWith("GO "))
             {
@@ -166,7 +187,10 @@ public class Main {
                     exit.getDoor().open();
                 }
             }
-        }
+
+
+
+        }//and while
 
 
     }
