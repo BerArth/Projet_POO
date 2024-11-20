@@ -24,6 +24,12 @@ public class Bag extends Item {
     public Character getOwner() {
         return owner;
     }
+    public List<Item> getItems() {
+        return items;
+    }
+    public List<Item> getItem(Item item) {
+        return items;
+    }
 
     public void setOwner(Hero newOwner) {
         if (this.owner != null) {
@@ -68,4 +74,7 @@ public class Bag extends Item {
         }
     }
 
+    public boolean containItem(Item item){
+        return this.items.contains(item);
+    }
 }
