@@ -11,35 +11,23 @@ import java.util.Set;
 import java.util.Scanner;
 
 public class Main {
+
+    private static final String SAGE_SPEACH = "Little hero hello, \nTo discover a lot of things here, you are going. \nTo get out of my help you need.";
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
         //test characterse
 
-        Helper h1 = new Helper("Sage", "Hello im Sage");
+        Helper h1 = new Helper("Sage", SAGE_SPEACH);
         Helper h2 = new Helper("Ivrogne", "Hello im ivrogne");
         Hero hero = new Hero("Michel", "hello michel");
         Retailer retailer = new Retailer("Forging", "hello Forging");
-        h1.speek();
-        h2.speek();
-
         Boss boss = new Boss("Contre-Maitre", "hello contre-maitre");
-        boss.attack(hero);
-        hero.printStateHp();
-        h1.attack(boss);
-        h1.giveClue(h1);
-        hero.giveClue(hero);
-
-        System.out.println("***********************************************");
 
         KeyPart keypartforest = new KeyPart(1);
 
-        //test echange et achat
-//        hero.getBag().addItem(new KeyPart(1));
-        hero.getBag().addItem(new KeyPart(2));
-        hero.getBag().addItem(new KeyPart(3));
-        hero.getBag().addItem(new KeyPart(4));
 
         System.out.println("Bag inventory before exchange :");
         hero.getBag().printItems();
@@ -57,7 +45,11 @@ public class Main {
         retailer.sellItem(flacon, hero);
         hero.getBag().printItems();
 
-        System.out.println("***********************************************");
+
+        hero.getBag().addItem(new KeyPart(1));
+        hero.getBag().addItem(new KeyPart(2));
+        hero.getBag().addItem(new KeyPart(3));
+        hero.getBag().addItem(new KeyPart(4));
 
 
         //test item
@@ -66,33 +58,31 @@ public class Main {
         Bag bag = new Bag("Bag", 10);
         Net net = new Net("Net", 5);
 
-        h1.printStateHp();    // 100
-        w1.attack(h1);
-        h1.printStateHp();    // 50
-        food.heal(h1);          //  maxHP ?
-        h1.printStateHp();    // 60
-//        net.Catch(null);
-//        net.Catch(flacon);
+        hero.getBag().addItem(w1);
 
         //test des rooms
         List<Item> itemsR1 = new ArrayList<>();
         itemsR1.add(keypartforest);
 
-        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", null, itemsR1);
-        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", null, null);
+        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", retailer, null);
+        Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", boss, null);
 
 
         Set<Integer> requiredParts = Set.of(1,2,3,4);
-        DoorWithKey door2forest = new DoorWithKey(requiredParts);
+        //DoorWithKey door2forest = new DoorWithKey(requiredParts);
+        Door clairere2forest = new Door();
         Door door2clairiere = new Door();
 
-        Exit exit2forest = new Exit("forest", forest, door2forest);
+        Exit exit2forest = new Exit("forest", forest, clairere2forest);
         Exit forest2stratRoom = new Exit("clairiere", startRoom, door2clairiere);
 
         startRoom.addExit(exit2forest);
         forest.addExit(forest2stratRoom);
 
         Room currentRoom = startRoom;
+
+
+        System.out.println("***********************************************");
 
         System.out.println("Bienvenue dans l'aventure !");
         System.out.println("Commandes : GO [direction], UNLOCK [direction], OPEN [direction], HELP, QUIT, INVENTORY, LOOK");
@@ -134,6 +124,7 @@ public class Main {
             }
             else if(command.startsWith("GO "))
             {
+
                 String direction = command.substring(3).toLowerCase();
                 Exit exit = currentRoom.getExit(direction);
 
@@ -154,6 +145,12 @@ public class Main {
                 {
                     System.out.println("Il n'y a pas de sortie dans cette direction");
                 }
+
+                if(currentRoom.haveBosse()){
+                    System.out.println("Start combat");
+                    hero.attack(currentRoom.getBoss());
+                }
+
             }
             else if(command.startsWith("UNLOCK "))
             {

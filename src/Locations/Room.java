@@ -1,5 +1,6 @@
 package Locations;
 
+import Characters.Boss;
 import Characters.Character;
 import Items.*;
 
@@ -57,6 +58,19 @@ public class Room {
 
     public void removeItem(Item item){
         items.remove(item);
+    }
+
+    public boolean haveBosse(){
+        if(getChara() instanceof Boss){
+            System.out.println("This room have a bosse");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Boss getBoss(){
+        return (Boss) getChara();
     }
 
 }

@@ -20,6 +20,7 @@ public class Door {
 
     public void open() {
         setOpen(true);
+        System.out.println("You opened the door");
     }
     public void close() {
         setOpen(false);

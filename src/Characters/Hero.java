@@ -62,4 +62,12 @@ public class Hero extends Character {
         }
     }
 
+    public void attack(Character target){
+        if(this.getBag().getItem("Sword") == null){
+            System.out.println("Oh no you don't have weapon you can't attack this character.");
+        }else{
+            System.out.println("you attack");
+        }
+    }
+
 }

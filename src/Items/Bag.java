@@ -97,12 +97,7 @@ public class Bag extends Item {
                 foundItem = item;
             }
         }
-        if(foundItem == null){
-            System.out.println("Item not found.");
-            return null;
-        }else{
-            return foundItem;
-        }
+        return foundItem;
     }
 
     public void printItems(){

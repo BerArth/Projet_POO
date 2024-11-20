@@ -43,16 +43,6 @@ public abstract class Character {
         return (this.getHp() <= 0);
     }
 
-    public void attack(Character target){
-        if(!isDead()){
-            target.reducePv(this.getStrength());
-            if(target.getHp() <= 0){
-                System.out.println("The target is dead.");
-            }else {
-                System.out.println("The target take " + this.getStrength() + " damage.");
-            }
-        }
-    }
 
     public void restorePv(int heal){
         if(this.hp > 0){
@@ -72,7 +62,7 @@ public abstract class Character {
 
     public void giveClue(Character speeker){
         if(speeker instanceof Helper){
-            if(Objects.equals(speeker.getNAME(), "Saje")){
+            if(Objects.equals(speeker.getNAME(), "Sage")){
                 System.out.println(this.getNAME() + " says : I'll give you a clue");
             }
         }

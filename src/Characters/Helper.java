@@ -9,8 +9,4 @@ public class Helper extends Character {
     }
 
 
-    @Override
-    public void attack(Character target) {
-        System.out.println("I am helper i cant attack");
-    }
 }
