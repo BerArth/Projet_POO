@@ -4,7 +4,7 @@ import Doors.DoorWithKey;
 import Items.*;
 import Locations.Exit;
 import Locations.Room;
-
+import java.util.Set;
 import java.util.Scanner;
 
 public class Main {
@@ -31,10 +31,10 @@ public class Main {
         System.out.println("***********************************************");
 
         //test echange et achat
-        hero.getBag().addItem(new KeyPart(1));
-        hero.getBag().addItem(new KeyPart(2));
-        hero.getBag().addItem(new KeyPart(3));
-        hero.getBag().addItem(new KeyPart(4));
+//        hero.getBag().addItem(new KeyPart(1));
+//        hero.getBag().addItem(new KeyPart(2));
+//        hero.getBag().addItem(new KeyPart(3));
+//        hero.getBag().addItem(new KeyPart(4));
 
         System.out.println("Bag inventory before exchange :");
         hero.getBag().printItems();
@@ -73,7 +73,9 @@ public class Main {
         Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", null);
         Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", null);
 
-        DoorWithKey door2forest = new DoorWithKey(12);
+
+        Set<Integer> requiredParts = Set.of(1,2,3,4);
+        DoorWithKey door2forest = new DoorWithKey(requiredParts);
         Door door2clairiere = new Door();
 
         Exit exit2forest = new Exit("forest", forest, door2forest);
@@ -87,7 +89,7 @@ public class Main {
         System.out.println("Bienvenue dans l'aventure !");
         System.out.println("Commandes : GO [direction], UNLOCK [direction], OPEN [direction], HELP, QUIT");
 
-        /*
+
         while(true) {
             System.out.println(currentRoom.getDescription());
 
@@ -100,6 +102,10 @@ public class Main {
 
             System.out.print("> ");
             String command = scanner.nextLine().trim().toUpperCase();
+
+            if(command.equals("INVENTORY")) {
+                hero.getBag().printItems();
+            }
 
             if (command.equals("QUIT")) {
                 System.out.println("Merci d'avoir joué !");
@@ -139,7 +145,10 @@ public class Main {
                 }
                 else if (exit.getDoor() instanceof DoorWithKey keyDoor)
                 {
-                    keyDoor.unlock(k);
+
+                    Key key = (Key) hero.getBag().getItem("Key");
+                    keyDoor.unlock(key);
+
                 }
                 else
                 {
@@ -159,7 +168,7 @@ public class Main {
             }
         }
 
-        */
+
     }
 
 }

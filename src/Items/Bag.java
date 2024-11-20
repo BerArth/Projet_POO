@@ -90,6 +90,21 @@ public class Bag extends Item {
         return keyParts;
     }
 
+    public Item getItem(String name){
+        Item foundItem = null;
+        for(Item item : items){
+            if(item.getName().equals(name)){
+                foundItem = item;
+            }
+        }
+        if(foundItem == null){
+            System.out.println("Item not found.");
+            return null;
+        }else{
+            return foundItem;
+        }
+    }
+
     public void printItems(){
         if(items.isEmpty()){
             System.out.println("No items in your bag.");

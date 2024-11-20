@@ -6,7 +6,7 @@ public class Key extends Item {
     private final Set<Integer> keyParts;
 
     public Key(Set<Integer> keyParts) {
-        super("CompleteKey", 4);
+        super("Key", 4);
         this.keyParts = keyParts;
     }
 
