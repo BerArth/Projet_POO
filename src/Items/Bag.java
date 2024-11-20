@@ -1,5 +1,6 @@
 package Items;
 
+import java.util.ArrayList;
 import java.util.List;
 import Characters.Character;
 import Characters.Hero;
@@ -13,6 +14,7 @@ public class Bag extends Item {
 
     public Bag(String name, int weight) {
         super(name, weight);
+        this.items = new ArrayList<>();
     }
 
     public int getMAX_CAPACITY() {
@@ -77,4 +79,27 @@ public class Bag extends Item {
     public boolean containItem(Item item){
         return this.items.contains(item);
     }
+
+    public List<KeyPart> getKeyParts(){
+        List<KeyPart> keyParts = new ArrayList<>();
+        for(Item item : items){
+            if(item instanceof KeyPart){
+                keyParts.add((KeyPart) item);
+            }
+        }
+        return keyParts;
+    }
+
+    public void printItems(){
+        if(items.isEmpty()){
+            System.out.println("No items in your bag.");
+        }else{
+            System.out.println("Items in your bag:");
+            for(Item item : items){
+                item.printName();
+            }
+        }
+    }
+
+
 }

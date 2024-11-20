@@ -1,22 +1,16 @@
 package Items;
 
-public class Key {
-    private final int KEYNB;
+import java.util.Set;
 
-    public Key(KeyPart a, KeyPart b){
-        this.KEYNB = assembly(a, b);
+public class Key extends Item {
+    private final Set<Integer> keyParts;
+
+    public Key(Set<Integer> keyParts) {
+        super("CompleteKey", 4);
+        this.keyParts = keyParts;
     }
 
-    public int getKeyNB() {
-        return KEYNB;
+    public Set<Integer> getKeyParts() {
+        return keyParts;
     }
-
-    public void printnb(){
-        System.out.println(KEYNB);
-    }
-
-    public int assembly(KeyPart a, KeyPart b) {
-        return a.getKeyPartNb() + b.getKeyPartNb();
-    }
-
 }

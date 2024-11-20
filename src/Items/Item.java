@@ -21,7 +21,7 @@ public abstract class Item {
     }
 
     public void printName(){
-        System.out.println(this.name);
+        System.out.println(" -" + this.name);
     }
 
     public void printDescription(){

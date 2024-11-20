@@ -17,6 +17,7 @@ public class Main {
         Helper h1 = new Helper("Sage", "Hello im Sage");
         Helper h2 = new Helper("Ivrogne", "Hello im ivrogne");
         Hero hero = new Hero("Michel", "hello michel");
+        Retailer retailer = new Retailer("Forging", "hello Forging");
         h1.speek();
         h2.speek();
 
@@ -27,12 +28,38 @@ public class Main {
         h1.giveClue(h1);
         hero.giveClue(hero);
 
+        System.out.println("***********************************************");
+
+        //test echange et achat
+        hero.getBag().addItem(new KeyPart(1));
+        hero.getBag().addItem(new KeyPart(2));
+        hero.getBag().addItem(new KeyPart(3));
+        hero.getBag().addItem(new KeyPart(4));
+
+        System.out.println("Bag inventory before exchange :");
+        hero.getBag().printItems();
+
+        retailer.exchangeKeyPart(hero);
+
+        System.out.println("Bag inventory after exchange :");
+        hero.getBag().printItems();
+
+        hero.addGold(30);
+        hero.printGold();
+
+        Flacon flacon = new Flacon("Flacon", 5);
+        retailer.addInventory(flacon, 20);
+        retailer.sellItem(flacon, hero);
+        hero.getBag().printItems();
+
+        System.out.println("***********************************************");
+
+
         //test item
         Weapon w1 = new Weapon("Sword",40, 50);
         Food food = new Food("Potato",5, 10);
         Bag bag = new Bag("Bag", 10);
         Net net = new Net("Net", 5);
-        Flacon flacon = new Flacon("Flacon", 5);
 
         h1.printStateHp();    // 100
         w1.attack(h1);
@@ -43,11 +70,6 @@ public class Main {
 //        net.Catch(flacon);
 
         //test des rooms
-
-        KeyPart kp1 = new KeyPart(5);
-        KeyPart kp2 = new KeyPart(7);
-        Key k = new Key(kp1, kp2);
-
         Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", null);
         Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", null);
 
@@ -65,6 +87,7 @@ public class Main {
         System.out.println("Bienvenue dans l'aventure !");
         System.out.println("Commandes : GO [direction], UNLOCK [direction], OPEN [direction], HELP, QUIT");
 
+        /*
         while(true) {
             System.out.println(currentRoom.getDescription());
 
@@ -135,5 +158,8 @@ public class Main {
                 }
             }
         }
+
+        */
     }
+
 }

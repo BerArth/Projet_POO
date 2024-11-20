@@ -4,10 +4,9 @@ import Items.*;
 
 public class DoorWithKey extends AutoLockDoor {
 
-    private final int KEYNB;
 
-    public DoorWithKey(int KEYNB) {
-        this.KEYNB = KEYNB;
+    public DoorWithKey() {
+
     }
 
     @Override
@@ -15,17 +14,12 @@ public class DoorWithKey extends AutoLockDoor {
         System.out.println("We need key for unlock this door");
     }
 
-    public int getKeyDoorNb(){
-        return this.KEYNB;
-    }
 
     public void unlock(Key k){
-        if (getKeyDoorNb() == k.getKeyNB()) {
-            super.unlock();
-        } else {
-            System.out.println("Ce n'est pas la bonne clé");
-        }
+
     }
+
+
 
     @Override
     public String toString() {
