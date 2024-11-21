@@ -5,8 +5,8 @@ import java.util.Set;
 public class Key extends Item {
     private final Set<Integer> keyParts;
 
-    public Key(Set<Integer> keyParts) {
-        super("Key", 4);
+    public Key(Set<Integer> keyParts, String description) {
+        super("Key", 4, description);
         this.keyParts = keyParts;
     }
 

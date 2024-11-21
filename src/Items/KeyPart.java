@@ -4,8 +4,8 @@ public class KeyPart extends Item {
 
     private final int KEY_PART_NB;
 
-    public KeyPart(int keypartnb){
-        super("keypart-" + keypartnb, 1);
+    public KeyPart(int keypartnb, String description) {
+        super("keypart-" + keypartnb, 1, description);
         this.KEY_PART_NB = keypartnb;
     }
 

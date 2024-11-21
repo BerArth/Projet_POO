@@ -13,22 +13,38 @@ import java.util.Scanner;
 public class Main {
 
     private static final String SAGE_SPEACH = "Little hero hello, \nTo discover a lot of things here, you are going. \nTo get out of my help you need.";
+    private static final String DRUNKARD_SPEACH =  "Eh! Oh! You! Yes, you! Why are you looking at me like that? \n No! No, no, no, I'm not drunk.\n \nEh ?! \nAre you an adventurer or something like that? \n...I was an adventurer when I was younger. I EVEN had a boat... \n I like you! If you find my code, I give you my boat. Yeh! So...";
+    private static final String FOREMAN_SPEACH = "YOU HERE! \nWhen your foreman speaks, you listen! \nYou really think you can stand in front of your foreman and do nothing. Go to work now or I'll put you there pronto!";
+    private static final String BLACKSMITH_SPEACH = "Hey friend! \nIt seems that you need my blacksmithing skills to obtain a complete key. \nBring me the key parts and I'll help you.";
+    private static final String HERBERT_SPEACH = "Welcome to my humble shop. \nSince the city is close, I don't have many products. I can just sell you a glass flacon.";
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
 
-        //test characterse
 
-        Helper h1 = new Helper("Sage", SAGE_SPEACH);
-        Helper h2 = new Helper("Ivrogne", "Hello im ivrogne");
-        Hero hero = new Hero("Michel", "hello michel");
-        Retailer retailer = new Retailer("Forging", "hello Forging");
-        Boss boss = new Boss("Contre-Maitre", "hello contre-maitre");
+        //Characters
+        Helper SAGE = new Helper("Sage", SAGE_SPEACH);
+        Helper drunkard = new Helper("Reynold the Drunkard", DRUNKARD_SPEACH);
+        Boss boss = new Boss("Foreman", FOREMAN_SPEACH);
+        Hero hero = new Hero("Michel", "Hello!");
+        Retailer blacksmith = new Retailer("Ragnard the blacksmith", BLACKSMITH_SPEACH);
+        Retailer shopkeeper = new Retailer("Herbert", HERBERT_SPEACH);
 
-        KeyPart keypartforest = new KeyPart(1);
+        //Items
+        Book history = new Book("History", 25, "You can just read the title <<History of gold mining>>, by squinting your eyes, you can guess some characters and a name : ... 3 Caesar \n");
+        Net net = new Net("Net", 5, "It's a simple net with very tiny mesh.");
+        Flacon flacon = new Flacon("Flacon", 20, "It's just a flacon with a pierced cap.");
+        Weapon pickaxe = new Weapon("Pickaxe", 50, 50, "This pickaxe seems very sturdy. But it seeams that it's not dust but blood that there is. There appears to be blood on the metal.");
+        Food bread = new Food("Bread", 10, 50, "A generous slice of bread!");
+        Firefly firefly = new Firefly("Firefly", 3, "An insect that is active during the night and whose tail produces light - Cambridge Dicrionary");
+        PublicNotice mosaic = new PublicNotice("Mosaic", 5000, "...");
+        PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, "Public Notice : \n Due to a collapse access to the outside of the earth is no impossible. \n The sage revealed to us that another door to the outside still exist. \nWe call on all citizens to find this door and open it. \nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor");
+        PublicNotice minesWarning = new PublicNotice("Warning", 3000, "Access to the mine only for workers. \nRelatives, please wait outside \nNotice to the workers: Don't forget to listen to the cuckoo");
 
+//        hero.getBag().addItem(pickaxe);
 
+    /*
         System.out.println("Bag inventory before exchange :");
         hero.getBag().printItems();
 
@@ -59,12 +75,10 @@ public class Main {
         Net net = new Net("Net", 5);
 
         hero.getBag().addItem(w1);
-
+     */
         //test des rooms
-        List<Item> itemsR1 = new ArrayList<>();
-        itemsR1.add(keypartforest);
 
-        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", retailer, null);
+        Room startRoom = new Room("Clairiere", "Vous êtes dans une clairière tranquille entourée de sentiers.", blacksmith, null);
         Room forest = new Room("Forêt", "Vous êtes dans une forêt dense.", boss, null);
 
 
@@ -73,7 +87,7 @@ public class Main {
         Door clairere2forest = new Door();
         Door door2clairiere = new Door();
 
-        Exit exit2forest = new Exit("forest", forest, clairere2forest);
+        Exit exit2forest = new Exit("forest", forest, null);
         Exit forest2stratRoom = new Exit("clairiere", startRoom, door2clairiere);
 
         startRoom.addExit(exit2forest);
@@ -89,6 +103,12 @@ public class Main {
         System.out.println(currentRoom.getDescription());
 
         while(true) {
+
+            if(hero.isDead()){
+                System.out.println("You are dead, try again!");
+                break;
+            }
+
 
             System.out.print("> ");
             String command = scanner.nextLine().trim();
@@ -132,7 +152,10 @@ public class Main {
 
                 if(exit != null)
                 {
-                    if(!exit.getDoor().isOpen())
+                    if(exit.getDoor() == null){
+                        currentRoom = exit.getDirection();
+                    }
+                    else if(!exit.getDoor().isOpen())
                     {
                         System.out.println("Cette porte est fermé");
                     }
@@ -147,8 +170,10 @@ public class Main {
                 }
 
                 if(currentRoom.haveBosse()){
+                    boss.speek();
                     System.out.println("Start combat");
-                    hero.attack(currentRoom.getBoss());
+                    System.out.println("Boss health : " + boss.getHp() + "\n" + "Hero life : " + hero.getHp());
+                    currentRoom.fight(boss, hero);
                 }
 
             }

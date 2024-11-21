@@ -5,8 +5,8 @@ public class Food extends Item{
 
     private int heal;
 
-    public Food(String name, int weight, int heal) {
-        super(name, weight);
+    public Food(String name, int weight, int heal, String description) {
+        super(name, weight, description);
         this.heal = heal;
     }
 

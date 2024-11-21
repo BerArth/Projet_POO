@@ -13,8 +13,8 @@ public class Hero extends Character {
     private Bag bag;
 
     public Hero(String name, String speach){
-        super(name, 100, 20, speach);
-        this.bag = new Bag("Bag", 100);
+        super(name, 100, 5, speach);
+        this.bag = new Bag("Bag", 100, "Just a simple bag");
         this.gold = 0;
     }
 
@@ -62,12 +62,8 @@ public class Hero extends Character {
         }
     }
 
-    public void attack(Character target){
-        if(this.getBag().getItem("Sword") == null){
-            System.out.println("Oh no you don't have weapon you can't attack this character.");
-        }else{
-            System.out.println("you attack");
-        }
+    public boolean haveWeapon(){
+        return this.getBag().haveItem("Pickaxe");
     }
 
 }

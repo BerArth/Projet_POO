@@ -16,6 +16,11 @@ public class Retailer extends Character{
         this.inventory = new HashMap<>();
     }
 
+    @Override
+    public void attack(Character character) {
+        System.out.println("Im " + this.getNAME() + " I can't attack!");
+    }
+
     public void addInventory(Item item, int price){
         this.inventory.put(item, price);
     }
@@ -65,7 +70,7 @@ public class Retailer extends Character{
                 bag.removeItem(keyParts.get(i));
             }
 
-            Key key = new Key(Set.of(1,2,3,4));
+            Key key = new Key(Set.of(1,2,3,4), "A part of a key, it must take several to get the complete key.");
             bag.addItem(key);
             System.out.println("You have exchange your 4 key parts!");
         }

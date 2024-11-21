@@ -27,6 +27,7 @@ public abstract class Character {
     }
 
     public void speek(){
+        System.out.println("je parle");
         System.out.println(SPEACH);
     }
 
@@ -66,6 +67,10 @@ public abstract class Character {
                 System.out.println(this.getNAME() + " says : I'll give you a clue");
             }
         }
+    }
+
+    public void attack(Character target){
+        target.reducePv(this.getStrength());
     }
 
 }

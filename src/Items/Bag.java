@@ -12,8 +12,8 @@ public class Bag extends Item {
     private List<Item> items;
     private Hero owner;
 
-    public Bag(String name, int weight) {
-        super(name, weight);
+    public Bag(String name, int weight, String description) {
+        super(name, weight, description);
         this.items = new ArrayList<>();
     }
 
@@ -29,9 +29,10 @@ public class Bag extends Item {
     public List<Item> getItems() {
         return items;
     }
-    public List<Item> getItem(Item item) {
-        return items;
-    }
+
+//    public List<Item> getItem(Item item) {
+//        return items;
+//    }
 
     public void setOwner(Hero newOwner) {
         if (this.owner != null) {
@@ -76,10 +77,6 @@ public class Bag extends Item {
         }
     }
 
-    public boolean containItem(Item item){
-        return this.items.contains(item);
-    }
-
     public List<KeyPart> getKeyParts(){
         List<KeyPart> keyParts = new ArrayList<>();
         for(Item item : items){
@@ -90,6 +87,16 @@ public class Bag extends Item {
         return keyParts;
     }
 
+    public Weapon getWeapon(){
+        Weapon found = null;
+        for(Item item : items){
+            if(item instanceof Weapon){
+                found = (Weapon) item;
+            }
+        }
+        return found;
+    }
+
     public Item getItem(String name){
         Item foundItem = null;
         for(Item item : items){
@@ -98,6 +105,10 @@ public class Bag extends Item {
             }
         }
         return foundItem;
+    }
+
+    public boolean haveItem(String name){
+        return this.items.contains(this.getItem(name));
     }
 
     public void printItems(){

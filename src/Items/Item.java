@@ -7,9 +7,10 @@ public abstract class Item {
     //protected int price;
     protected int weight;
 
-    public Item(String name, int weight) {
+    public Item(String name, int weight, String description) {
         this.name = name;
         this.weight = weight;
+        this.description = description;
     }
 
     public String getName(){

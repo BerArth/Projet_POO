@@ -9,8 +9,8 @@ public class Flacon extends Item{
     private List<Firefly> fireflies;
     private boolean isFull;
 
-    public Flacon(String name, int weight) {
-        super(name, weight);
+    public Flacon(String name, int weight, String description) {
+        super(name, weight, description);
         this.fireflies = new ArrayList<>();
 
     }
@@ -27,7 +27,7 @@ public class Flacon extends Item{
         if(this.isFull){
             System.out.println("Flacon is already full.\n");
         }else{
-            Firefly f = new Firefly("Firefly", 1);
+            Firefly f = new Firefly("Firefly", 1, "Bright little insects");
             for (int i = 0; i < n && (!this.isFull); i++) {
                 fireflies.add(f);
             }

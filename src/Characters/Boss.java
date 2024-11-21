@@ -6,8 +6,4 @@ public class Boss extends Character {
         super(name, 200, 20, speach);
     }
 
-    @Override
-    public void speek(){
-    }
-
 }

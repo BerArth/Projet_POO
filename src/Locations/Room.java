@@ -2,12 +2,14 @@ package Locations;
 
 import Characters.Boss;
 import Characters.Character;
+import Characters.Hero;
 import Items.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.concurrent.TimeUnit;
 
 
 public class Room {
@@ -71,6 +73,50 @@ public class Room {
 
     public Boss getBoss(){
         return (Boss) getChara();
+    }
+
+    public void fight(Boss boss, Hero hero){
+        if(hero.haveWeapon()){
+            Weapon pickaxe = hero.getBag().getWeapon();
+            while (true){
+                pickaxe.attack(boss);
+                System.out.println(boss.getNAME() + " take " + pickaxe.getDamage() + " damage!");
+
+                if(boss.isDead()){
+                    break;
+                }
+
+                boss.attack(hero);
+                System.out.println("You take " + boss.getStrength() + " damage!");
+
+                if(hero.isDead()){
+                    break;
+                }
+            }
+        }else{
+            System.out.println("OH NO, you don't have weapon");
+            while (true){
+                hero.attack(boss);
+                System.out.println(boss.getNAME() + " take " + hero.getStrength() + " damage!");
+
+                if(boss.isDead()){
+                    break;
+                }
+
+                boss.attack(hero);
+                System.out.println("You take " + boss.getStrength() + " damage!");
+
+                if(hero.isDead()){
+                    break;
+                }
+            }
+        }
+
+        if (boss.isDead()){
+            System.out.println("Good job, " + boss.getNAME() + " is dead!");
+        }else {
+            System.out.println("Oh no, you are dead!");
+        }
     }
 
 }

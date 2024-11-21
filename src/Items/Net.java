@@ -6,8 +6,8 @@ public class Net extends Item{
 
     //Filet pour luciole
 
-    public Net(String name, int weight) {
-        super(name, weight);
+    public Net(String name, int weight, String description) {
+        super(name, weight, description);
     }
 
     private int HowManyCatch(){
