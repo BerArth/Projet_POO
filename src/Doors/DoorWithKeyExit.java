@@ -1,14 +1,16 @@
 package Doors;
 
 import Items.*;
+import Locations.Room;
 
 import java.util.Set;
 
-public class DoorWithKey extends AutoLockDoor {
+public class DoorWithKeyExit extends AutoLockDoorExit {
 
     private final Set<Integer> requiredParts;
 
-    public DoorWithKey(Set<Integer> requiredParts) {
+    public DoorWithKeyExit(String name, Room direction, Set<Integer> requiredParts) {
+        super(name, direction);
         this.requiredParts = requiredParts;
     }
 

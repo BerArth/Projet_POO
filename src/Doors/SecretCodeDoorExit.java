@@ -1,11 +1,13 @@
 package Doors;
 
-public class SecretDoor extends AutoLockDoor {
+import Locations.Room;
+
+public class SecretCodeDoorExit extends AutoLockDoorExit {
 
     private final int CODE;
 
-    public SecretDoor(int code) {
-        super();
+    public SecretCodeDoorExit(String name, Room direction, int code) {
+        super(name, direction);
         this.CODE = code;
     }
 

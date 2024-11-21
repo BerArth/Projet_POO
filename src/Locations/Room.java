@@ -3,40 +3,39 @@ package Locations;
 import Characters.Boss;
 import Characters.Character;
 import Characters.Hero;
+import Doors.DoorExit;
 import Items.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class Room {
 
     private final String NAME;
     private final String description;
-    private Map<String, Exit> exits;
+    private final Map<String, DoorExit> exits;
     private Character chara;
     private List<Item> items;
 
     public Room(String name, String description, Character chara, List<Item> items) {
         this.NAME = name;
         this.description = description;
-        this.exits = new HashMap<String, Exit>();
+        this.exits = new HashMap<String, DoorExit>();
         this.chara = chara;
         this.items = items;
     }
 
-    public void addExit(Exit exit) {
-        exits.put(exit.getDescription(), exit);
+    public void addExit(DoorExit exit) {
+        exits.put(exit.getName(), exit);
     }
 
-    public Exit getExit(String direction) {
+    public DoorExit getExit(String direction) {
         return exits.get(direction);
     }
 
-    public Map<String, Exit> getExits() {
+    public Map<String, DoorExit> getExits() {
         return exits;
     }
 
@@ -114,6 +113,7 @@ public class Room {
 
         if (boss.isDead()){
             System.out.println("Good job, " + boss.getNAME() + " is dead!");
+            this.chara = null;
         }else {
             System.out.println("Oh no, you are dead!");
         }

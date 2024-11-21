@@ -1,12 +1,14 @@
 package Doors;
 
 
-public class AutoLockDoor extends Door {
+import Locations.Room;
+
+public class AutoLockDoorExit extends DoorExit {
 
     private boolean locked = true;
 
-    public AutoLockDoor() {
-        super();
+    public AutoLockDoorExit(String name, Room direction) {
+        super(name, direction);
     }
 
     public boolean isLocked() {
@@ -20,7 +22,7 @@ public class AutoLockDoor extends Door {
     @Override
     public void open() {
         if (locked) {
-            System.out.println("Door is locked");
+            System.out.println(this.getName() + " is locked");
         } else {
             super.open();
         }
@@ -29,7 +31,7 @@ public class AutoLockDoor extends Door {
     @Override
     public void close() {
         if (locked) {
-            System.out.println("Door is already locked");
+            System.out.println(this.getName() + " is already locked");
         }else{
             super.close();
             setLocked(true);
@@ -39,8 +41,9 @@ public class AutoLockDoor extends Door {
     public void unlock() {
         if (locked) {
             locked = false;
+            System.out.println(this.getName() + " is unlocked");
         }else{
-            System.out.println("Door is not locked");
+            System.out.println(this.getName() + " is not locked");
         }
     }
 

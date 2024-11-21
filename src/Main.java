@@ -1,12 +1,11 @@
 import Characters.*;
-import Doors.Door;
-import Doors.DoorWithKey;
+import Doors.AutoLockDoorExit;
+import Doors.DoorExit;
+import Doors.DoorWithKeyExit;
+import Doors.Exit;
 import Items.*;
-import Locations.Exit;
 import Locations.Room;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.Scanner;
 
@@ -42,7 +41,7 @@ public class Main {
         PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, "Public Notice : \n Due to a collapse access to the outside of the earth is no impossible. \n The sage revealed to us that another door to the outside still exist. \nWe call on all citizens to find this door and open it. \nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor");
         PublicNotice minesWarning = new PublicNotice("Warning", 3000, "Access to the mine only for workers. \nRelatives, please wait outside \nNotice to the workers: Don't forget to listen to the cuckoo");
 
-//        hero.getBag().addItem(pickaxe);
+        hero.getBag().addItem(pickaxe);
 
     /*
         System.out.println("Bag inventory before exchange :");
@@ -84,11 +83,9 @@ public class Main {
 
         Set<Integer> requiredParts = Set.of(1,2,3,4);
         //DoorWithKey door2forest = new DoorWithKey(requiredParts);
-        Door clairere2forest = new Door();
-        Door door2clairiere = new Door();
 
-        Exit exit2forest = new Exit("forest", forest, null);
-        Exit forest2stratRoom = new Exit("clairiere", startRoom, door2clairiere);
+        AutoLockDoorExit exit2forest = new AutoLockDoorExit("forest", forest);
+        Exit forest2stratRoom = new Exit("clairiere", startRoom);
 
         startRoom.addExit(exit2forest);
         forest.addExit(forest2stratRoom);
@@ -127,8 +124,8 @@ public class Main {
                 System.out.println("Sorties disponibles :");
                 for (String direction : currentRoom.getExits().keySet())
                 {
-                    Exit exit = currentRoom.getExits().get(direction);
-                    System.out.println("- " + direction + ": " + exit.getDoor());
+                    DoorExit exit = currentRoom.getExits().get(direction);
+                    System.out.println("- " + direction);
                 }
 
             }
@@ -146,18 +143,16 @@ public class Main {
             {
 
                 String direction = command.substring(3).toLowerCase();
-                Exit exit = currentRoom.getExit(direction);
-
-                System.out.println(direction);
+                DoorExit exit = currentRoom.getExit(direction);
 
                 if(exit != null)
                 {
-                    if(exit.getDoor() == null){
+                    if(exit instanceof Exit){
                         currentRoom = exit.getDirection();
                     }
-                    else if(!exit.getDoor().isOpen())
+                    else if(!exit.isOpen())
                     {
-                        System.out.println("Cette porte est fermé");
+                        System.out.println(direction + " is closed");
                     }
                     else
                     {
@@ -180,18 +175,21 @@ public class Main {
             else if(command.startsWith("UNLOCK "))
             {
                 String direction = command.substring(7).toLowerCase();
-                Exit exit = currentRoom.getExit(direction);
+                DoorExit exit = currentRoom.getExit(direction);
 
                 if (exit == null)
                 {
                     System.out.println("Il n'y a pas de porte dans cette direction !");
                 }
-                else if (exit.getDoor() instanceof DoorWithKey keyDoor)
+                else if (exit instanceof DoorWithKeyExit keyDoor)
                 {
 
                     Key key = (Key) hero.getBag().getItem("Key");
                     keyDoor.unlock(key);
 
+                }
+                else if (exit instanceof AutoLockDoorExit lockDoor){
+                    lockDoor.unlock();
                 }
                 else
                 {
@@ -201,12 +199,12 @@ public class Main {
             else if(command.startsWith("OPEN "))
             {
                 String direction = command.substring(5).toLowerCase();
-                Exit exit = currentRoom.getExit(direction);
+                DoorExit exit = currentRoom.getExit(direction);
 
                 if (exit == null) {
                     System.out.println("Il n'y a pas de porte dans cette direction !");
                 } else {
-                    exit.getDoor().open();
+                    exit.open();
                 }
             }
 

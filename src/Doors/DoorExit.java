@@ -1,13 +1,27 @@
 package Doors;
 
+import Locations.Room;
+
 import java.util.*;
 
-public class Door {
+public class DoorExit {
 
+    private final String NAME;
+    private final Room DIRECTION;
     private boolean open;
 
-    public Door() {
-        open = false;
+    public DoorExit(String name, Room direction) {
+        this.open = false;
+        this.NAME = name;
+        this.DIRECTION = direction;
+    }
+
+    public Room getDirection(){
+        return DIRECTION;
+    }
+
+    public String getName(){
+        return NAME;
     }
 
     public boolean isOpen() {
@@ -32,8 +46,8 @@ public class Door {
                 + ", open = " + isOpen();
     }
 
-    public void printDoorList(List<? extends Door> dl){
-        for(Door d : dl){
+    public void printDoorList(List<? extends DoorExit> dl){
+        for(DoorExit d : dl){
             System.out.println(d);
         }
     }
