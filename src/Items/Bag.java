@@ -52,28 +52,26 @@ public class Bag extends Item {
         }
     }
 
-    public void printStateBag(Item item, String msgAfterNameItem){
-        item.printName();
-        System.out.println(item.getName() + msgAfterNameItem);
-    }
 
-    public void addItem(Item item){
+    public boolean addItem(Item item){
         if(this.capacity + item.weight <= this.MAX_CAPACITY){
             this.capacity += item.weight;
             this.items.add(item);
-            printStateBag(item, "has been added to your bag.");
+            System.out.println(item.getName() + " has been added to your bag.");
+            return true;
         }else{
-            printStateBag(item, "is too heavy for your bag.");
+            System.out.println(item.getName() + " is too heavy for your bag.");
+            return false;
         }
     }
 
     public void removeItem(Item item){
-        if(this.items.contains(item)){      // vérifier fonctionnement contains
+        if(this.items.contains(item)){
             this.capacity -= item.weight;
             this.items.remove(item);
-            printStateBag(item, "has been removed from your bag.");
+            System.out.println(item.getName() + "has been removed from your bag.");
         }else{
-            printStateBag(item, "is actually not in your bag.");
+            System.out.println(item.getName() + "is actually not in your bag.");
         }
     }
 
@@ -113,7 +111,7 @@ public class Bag extends Item {
 
     public void printItems(){
         if(items.isEmpty()){
-            System.out.println("No items in your bag.");
+            System.out.println("There is no item in your bag.");
         }else{
             System.out.println("Items in your bag:");
             for(Item item : items){

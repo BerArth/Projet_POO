@@ -7,7 +7,5 @@ public class PublicNotice extends Item{
         super(name, weight, description);
     }
 
-//    public PublicNotice(String title, String description, int price, int quantity ) {
-//
-//    }
+
 }

@@ -55,6 +55,13 @@ public class Main {
     public static void help(){
         System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK");
     }
+    public static boolean startsWithIgnoreCase(String input, String prefix){
+        if (input.length() < prefix.length()) {
+            return false;
+        }
+        return input.substring(0, prefix.length()).equalsIgnoreCase(prefix);
+    }
+
 
     public static void main(String[] args){
 
@@ -72,13 +79,13 @@ public class Main {
         //Items
         Bag bag = new Bag("Bag", 100, "It's just a simple bag!");
         Book history = new Book("History", 25, "You can just read the title <<History of gold mining>>, by squinting your eyes, you can guess some characters and a name : ... 3 Caesar \n");
-        Net net = new Net("Net", 5, "It's a simple net with very tiny mesh.");
+        Net net = new Net("Net", 105, "It's a simple net with very tiny mesh.");
         Flacon flacon = new Flacon("Flacon", 20, "It's just a flacon with a pierced cap.");
-        Weapon pickaxe = new Weapon("Pickaxe", 50, 50, "This pickaxe seems very sturdy. But it seeams that it's not dust but blood that there is. There appears to be blood on the metal.");
+        Weapon pickaxe = new Weapon("Pickaxe", 50, 50, "This pickaxe seems very sturdy. But it seems that it's not dust but blood that there is. There appears to be blood on the metal.");
         Food bread = new Food("Bread", 10, 50, "A generous slice of bread!");
         Firefly firefly = new Firefly("Firefly", 3, "An insect that is active during the night and whose tail produces light - Cambridge Dicrionary");
         PublicNotice mosaic = new PublicNotice("Mosaic", 5000, "...");
-        PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, "Public Notice : \n Due to a collapse access to the outside of the earth is no impossible. \n The sage revealed to us that another door to the outside still exist. \nWe call on all citizens to find this door and open it. \nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor");
+        PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, "Public Notice : \n Due to a collapse access to the outside of the earth is now impossible. \n The sage revealed to us that another door to the outside still exist. \nWe call on all citizens to find this door and open it. \nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor");
         PublicNotice minesWarning = new PublicNotice("Warning", 3000, "Access to the mine only for workers. \nRelatives, please wait outside \nNotice to the workers: Don't forget to listen to the cuckoo");
 
         KeyPart keyTemple1 = new KeyPart(1);
@@ -311,20 +318,20 @@ public class Main {
             System.out.print("> ");
             String command = scanner.nextLine().trim();
 
-            if (command.equals("QUIT")) {
+            if (command.equalsIgnoreCase("QUIT")) {
                 System.out.println("Thank's for playing! Goodbye!");
                 break;
             }
-            if(command.equals("HELP")){
+            if(command.equalsIgnoreCase("HELP")){
                 help();
             }
-            if(command.equals("LOOK")){
+            if(command.equalsIgnoreCase("LOOK")){
                 System.out.println(currentRoom.getDescription());
                 if(currentRoom.getItems() != null){
                     System.out.println("Item in this room : ");
                     currentRoom.printItems();
                 }else{
-                    System.out.println("this room contains no items!");
+                    System.out.println("This room contains no items!");
                 }
                 System.out.println("Available exits :");
                 for (String direction : currentRoom.getExits().keySet())
@@ -335,16 +342,20 @@ public class Main {
 
             }
 
-            if(command.startsWith("TAKE ")){
+            if(startsWithIgnoreCase(command, "TAKE ")){
                 String item = command.substring(5);
-                System.out.println(item);
-                hero.takeItem(currentRoom, item);
+                //System.out.println(item);
+                hero.takeItemFromRoom(currentRoom, item);
             }
 
-            if(command.equals("INVENTORY")) {
-                hero.getBag().printItems();
+            if(command.equalsIgnoreCase("INVENTORY")) {
+                if(hero.getBag() != null){
+                    hero.getBag().printItems();
+                }else{
+                    System.out.println("You need a bag to have some items !");
+                }
             }
-            else if(command.startsWith("GO "))
+            else if(startsWithIgnoreCase(command,"GO "))
             {
 
                 String direction = command.substring(3);
@@ -378,7 +389,7 @@ public class Main {
                 }
 
             }
-            else if(command.startsWith("UNLOCK "))
+            else if(startsWithIgnoreCase(command,"UNLOCK "))
             {
                 String direction = command.substring(7);
                 DoorExit exit = currentRoom.getExit(direction);
@@ -399,7 +410,7 @@ public class Main {
                     default -> System.out.println("Pas besoins de clé");
                 }
             }
-            else if(command.startsWith("OPEN "))
+            else if(startsWithIgnoreCase(command,"OPEN "))
             {
                 String direction = command.substring(5);
                 DoorExit exit = currentRoom.getExit(direction);
@@ -411,9 +422,7 @@ public class Main {
                 }
             }
 
-
-
-        }//and while
+        }//end while
 
 
     }
