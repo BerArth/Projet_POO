@@ -1,4 +1,5 @@
 import Characters.*;
+import Characters.Character;
 import Doors.*;
 import Items.*;
 import Locations.Room;
@@ -327,11 +328,11 @@ public class Main {
             }
             if(command.equalsIgnoreCase("LOOK")){
                 System.out.println(currentRoom.getDescription());
-                if(currentRoom.getItems() != null){
+                if(currentRoom.getItems() == null ||currentRoom.getItems().isEmpty()){
+                    System.out.println("This room contains no items!");
+                }else{
                     System.out.println("Item in this room : ");
                     currentRoom.printItems();
-                }else{
-                    System.out.println("This room contains no items!");
                 }
                 System.out.println("Available exits :");
                 for (String direction : currentRoom.getExits().keySet())
@@ -340,6 +341,27 @@ public class Main {
                     System.out.println("- " + direction);
                 }
 
+                if(currentRoom.getChara() != null){
+                    System.out.println("Character in  this room :\n -" + currentRoom.getChara().getNAME());
+                }
+
+            }
+
+            if(startsWithIgnoreCase(command,"LOOK ")){
+                String sitem = command.substring(5);
+                Item item = currentRoom.getItem(sitem);
+                if (item != null){
+                    System.out.println(item.getDescription());
+                }
+
+            }
+
+            if(command.equalsIgnoreCase("SPEEK")) {
+                if(currentRoom.getChara() != null){
+                    currentRoom.getChara().speek();
+                }else{
+                    System.out.println("You're alone, do you like talking to yourself?");
+                }
             }
 
             if(startsWithIgnoreCase(command, "TAKE ")){

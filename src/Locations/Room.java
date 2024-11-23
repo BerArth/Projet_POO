@@ -119,4 +119,21 @@ public class Room {
         }
     }
 
+    public Item getItem(String name){
+        boolean isfound = false;
+        Item found = null;
+        for(Item item : items){
+            if(item.getName().equals(name)){
+                isfound = true;
+                found =  item;
+                break;
+            }
+        }
+        if(!isfound){
+            System.out.println("Item " + name + " not found!");
+            return null;
+        }else{
+            return found;
+        }
+    }
 }
