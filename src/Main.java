@@ -359,6 +359,15 @@ public class Main {
             if(command.equalsIgnoreCase("SPEEK")) {
                 if(currentRoom.getChara() != null){
                     currentRoom.getChara().speek();
+                    if(currentRoom.getChara() instanceof Helper){
+                        System.out.println("You want a clue ? ");
+                        System.out.print("> ");
+                        String commands = scanner.nextLine().trim();
+                        if(commands.equalsIgnoreCase("YES")) {
+                            Helper helper = (Helper) currentRoom.getChara();
+                            helper.giveClue();
+                        }
+                    }
                 }else{
                     System.out.println("You're alone, do you like talking to yourself?");
                 }
