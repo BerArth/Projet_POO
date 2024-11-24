@@ -61,13 +61,6 @@ public abstract class Character {
         System.out.println(this.NAME +" have: " + this.hp + " HP.\n");
     }
 
-    public void giveClue(Character speeker){
-        if(speeker instanceof Helper){
-            if(Objects.equals(speeker.getNAME(), "Sage")){
-                System.out.println(this.getNAME() + " says : I'll give you a clue");
-            }
-        }
-    }
 
     public void attack(Character target){
         target.reducePv(this.getStrength());
