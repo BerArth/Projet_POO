@@ -43,6 +43,10 @@ public class Room {
         return description;
     }
 
+    public String getName() {
+        return NAME;
+    }
+
     public Character getChara() {
         return chara;
     }

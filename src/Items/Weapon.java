@@ -18,6 +18,7 @@ public class Weapon extends Item {
     }
 
 
+
     public void attack(Character character) {
         /*if(character instanceof Helper){
             System.out.println("You're trying to attack a defenseless character.");

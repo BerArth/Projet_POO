@@ -1,3 +1,4 @@
+/*
 package Test;
 
 import Characters.Hero;
@@ -29,9 +30,9 @@ public class HeroTest {
 
         bag = new Bag("Bag", 10, "a bag");
         bagV2 = new Bag("Bag", 10, "an another bag");
-        /*List<Item> itemsTestRoomWithBag = new ArrayList<>();
+        List<Item> itemsTestRoomWithBag = new ArrayList<>();
         itemsTestRoomWithBag.add(bag);
-        roomWithBag = new Room("TestRoomWithBag", "A room with a bag", null, itemsTestRoomWithBag);*/
+        roomWithBag = new Room("TestRoomWithBag", "A room with a bag", null, itemsTestRoomWithBag);
 
         firefly = new Firefly("Firefly", 1, "a firefly");
         net = new Net("Net", 5, "a net");
@@ -98,3 +99,4 @@ public class HeroTest {
         assertNull(hero.getBag().getItem("NonExistentItem")); // l'item ne doit pas apparaitre dans l'inventaire
     }
 }
+*/

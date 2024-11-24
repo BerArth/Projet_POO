@@ -1,13 +1,9 @@
 import Characters.*;
-import Characters.Character;
 import Doors.*;
 import Items.*;
 import Locations.Room;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -88,6 +84,7 @@ public class Main {
         PublicNotice mosaic = new PublicNotice("Mosaic", 5000, "...");
         PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, "Public Notice : \n Due to a collapse access to the outside of the earth is now impossible. \n The sage revealed to us that another door to the outside still exist. \nWe call on all citizens to find this door and open it. \nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor");
         PublicNotice minesWarning = new PublicNotice("Warning", 3000, "Access to the mine only for workers. \nRelatives, please wait outside \nNotice to the workers: Don't forget to listen to the cuckoo");
+        Gold gold = new Gold();
 
         KeyPart keyTemple1 = new KeyPart(1);
         KeyPart keyMine2 = new KeyPart(2);
@@ -118,41 +115,8 @@ public class Main {
         itemsEnt.add(minesWarning);
         List<Item> itemsTavern = new ArrayList<>();
         itemsTavern.add(bread);
-
-
-    /*
-        System.out.println("Bag inventory before exchange :");
-        hero.getBag().printItems();
-
-        retailer.exchangeKeyPart(hero);
-
-        System.out.println("Bag inventory after exchange :");
-        hero.getBag().printItems();
-
-        hero.addGold(30);
-        hero.printGold();
-
-        Flacon flacon = new Flacon("Flacon", 5);
-        retailer.addInventory(flacon, 20);
-        retailer.sellItem(flacon, hero);
-        hero.getBag().printItems();
-
-
-        hero.getBag().addItem(new KeyPart(1));
-        hero.getBag().addItem(new KeyPart(2));
-        hero.getBag().addItem(new KeyPart(3));
-        hero.getBag().addItem(new KeyPart(4));
-
-
-        //test item
-        Weapon w1 = new Weapon("Sword",40, 50);
-        Food food = new Food("Potato",5, 10);
-        Bag bag = new Bag("Bag", 10);
-        Net net = new Net("Net", 5);
-
-        hero.getBag().addItem(w1);
-     */
-        //test des rooms
+        List<Item> itemsMineG = new ArrayList<>();
+        itemsMineG.add(gold);
 
         //Room
         //Square
@@ -187,49 +151,49 @@ public class Main {
         //Mine
         Room mineAbd = new Room("Abandoned Mine", MINEABD, null, itemsMineAbd);
         Room mineExp = new Room("Exploited Mine", MINEEXP, null, null);
-        Room mineG = new Room("Gold Mine", MINEG, null, null); //gestion de l'or????
+        Room mineG = new Room("Gold Mine", MINEG, null, itemsMineG); //gestion de l'or????
         Room galleryS = new Room("South Gallery", GALLERYS, null, null);
         Room galleryN = new Room("North Gallery", GALLERYN, null, null);
         Room galleryM = new Room("Main Gallery", GALLERYM, boss, null);
         Room mineEnt = new Room("Mine Entrance", MINEENT, null, itemsEnt);
 
         //exit
-        Exit exitToSageRoom = new Exit("To Sage's Room", sageRoom);
-        Exit exitToTemple = new Exit("To Temple", temple);
-        Exit exitToLibrary = new Exit("To Library", library);
-        Exit exitToHouse = new Exit("To House", house);
-        Exit exitToSquareN = new Exit("To Square North", squareN);
-        Exit exitToSquareS = new Exit("To Square South", squareS);
-        Exit exitToSquareW = new Exit("To Square West", squareW);
-        Exit exitToSquareE = new Exit("To Square East", squareE);
-        Exit exitToStore = new Exit("To Store", store);
-        Exit exitToAlleyS = new Exit("To South Alley", alleyS);
-        Exit exitToAlleyW = new Exit("To West Alley", alleyW);
-        Exit exitToAlleyE = new Exit("To East Alley", alley);
-        Exit exitToSmithy = new Exit("To Smithy", smithy);
-        Exit exitToTavern = new Exit("To Tavern", tavern);
-        Exit exitToCemetery = new Exit("To Cemetery", cemetery);
+        Exit exitToSageRoom = new Exit("Sage's room", sageRoom);
+        Exit exitToTemple = new Exit("Temple", temple);
+        Exit exitToLibrary = new Exit("Library", library);
+        Exit exitToHouse = new Exit("House", house);
+        Exit exitToSquareN = new Exit("Square north", squareN);
+        Exit exitToSquareS = new Exit("Square south", squareS);
+        Exit exitToSquareW = new Exit("Square west", squareW);
+        Exit exitToSquareE = new Exit("Square east", squareE);
+        Exit exitToStore = new Exit("Store", store);
+        Exit exitToAlleyS = new Exit("South alley", alleyS);
+        Exit exitToAlleyW = new Exit("West alley", alleyW);
+        Exit exitToAlleyE = new Exit("East alley", alley);
+        Exit exitToSmithy = new Exit("Smithy", smithy);
+        Exit exitToTavern = new Exit("Tavern", tavern);
+        Exit exitToCemetery = new Exit("Cemetery", cemetery);
 
-        Exit exitToMineExp = new Exit("To Exploited Mine", mineExp);
-        Exit exitToMineG = new Exit("To Gold Mine", mineG);
-        Exit exitToGalleryS = new Exit("To South Gallery", galleryS);
-        Exit exitToGalleryN = new Exit("To North Gallery", galleryN);
-        Exit exitToGalleryM = new Exit("To Main Gallery", galleryM);
-        Exit exitToMineEnt = new Exit("To Mine Entrance", mineEnt);
+        Exit exitToMineExp = new Exit("Exploited mine", mineExp);
+        Exit exitToMineG = new Exit("Gold mine", mineG);
+        Exit exitToGalleryS = new Exit("South gallery", galleryS);
+        Exit exitToGalleryN = new Exit("North gallery", galleryN);
+        Exit exitToGalleryM = new Exit("Main gallery", galleryM);
+        Exit exitToMineEnt = new Exit("Mine entrance", mineEnt);
 
-        Exit exitToCaveL = new Exit("To Light Cave", caveL);
-        Exit exitToIsland = new Exit("To Island", island);
+        Exit exitToCaveL = new Exit("Light cave", caveL);
+        Exit exitToIsland = new Exit("Island", island);
 
         //pour le moment juste des exits
-        Exit exitToCaveStl = new Exit("To Stalactite Cave", caveStl);
-        Exit exitToSpring = new Exit("To Underground Spring", spring);
+        Exit exitToCaveStl = new Exit("Stalactite cave", caveStl);
+        Exit exitToSpring = new Exit("Underground spring", spring);
 
         Set<Integer> requiredParts = Set.of(1,2,3);
         DoorWithKeyExit exitToOutside = new DoorWithKeyExit("Fountain", outside, requiredParts);
 
-        SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("To Square North", squareN, 666);
+        SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("Square north", squareN, 666);
         SecretCodeDoorExit exitToBoat = new SecretCodeDoorExit("Boat", boat, 666);
-        SecretCodeDoorExit exitToMineAbd = new SecretCodeDoorExit("To Abandoned Mine", mineAbd, 666);
+        SecretCodeDoorExit exitToMineAbd = new SecretCodeDoorExit("Abandoned mine", mineAbd, 666);
         SecretCodeDoorExit exitToStatue = new SecretCodeDoorExit("Statue", statue, 666);
 
         squareN.addExit(exitToCemetery);
@@ -274,7 +238,7 @@ public class Main {
         caveL.addExit(exitToSpring);
         island.addExit(exitToBoat);
         spring.addExit(exitToCaveL);
-        //spring.addExit(boat);
+        spring.addExit(exitToBoat);
         boat.addExit(exitToIsland);
         boat.addExit(exitToSpring);
 
@@ -298,7 +262,7 @@ public class Main {
         mineG.addExit(exitToMineExp);
         mineG.addExit(exitToCaveL);
 
-        Room currentRoom = squareN;
+        Room currentRoom = house;
 
 
 
@@ -327,24 +291,27 @@ public class Main {
                 help();
             }
             if(command.equalsIgnoreCase("LOOK")){
-                System.out.println(currentRoom.getDescription());
-                if(currentRoom.getItems() == null ||currentRoom.getItems().isEmpty()){
-                    System.out.println("This room contains no items!");
+                if(Objects.equals(currentRoom.getName(), "Underground Spring")){
+                    System.out.println("This room is too dark, you need a light to be able to see.");
                 }else{
-                    System.out.println("Item in this room : ");
-                    currentRoom.printItems();
-                }
-                System.out.println("Available exits :");
-                for (String direction : currentRoom.getExits().keySet())
-                {
-                    DoorExit exit = currentRoom.getExits().get(direction);
-                    System.out.println("- " + direction);
-                }
+                    System.out.println(currentRoom.getDescription());
+                    if(currentRoom.getItems() == null ||currentRoom.getItems().isEmpty()){
+                        System.out.println("This room contains no items!");
+                    }else{
+                        System.out.println("Item in this room : ");
+                        currentRoom.printItems();
+                    }
+                    System.out.println("Available exits :");
+                    for (String direction : currentRoom.getExits().keySet())
+                    {
+                        DoorExit exit = currentRoom.getExits().get(direction);
+                        System.out.println("- " + direction);
+                    }
 
-                if(currentRoom.getChara() != null){
-                    System.out.println("Character in  this room :\n -" + currentRoom.getChara().getNAME());
+                    if(currentRoom.getChara() != null){
+                        System.out.println("Character in  this room :\n -" + currentRoom.getChara().getNAME());
+                    }
                 }
-
             }
 
             if(startsWithIgnoreCase(command,"LOOK ")){
