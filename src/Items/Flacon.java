@@ -23,21 +23,24 @@ public class Flacon extends Item{
         return this.isFull;
     }
 
+    public int get_Size() {
+        return this.fireflies.size();
+    }
+
     public void addFireflies(int n) {
         if(this.isFull){
             System.out.println("Flacon is already full.\n");
         }else{
             Firefly f = new Firefly("Firefly", 1, "Bright little insects");
             for (int i = 0; i < n && (!this.isFull); i++) {
-                fireflies.add(f);
+                this.fireflies.add(f);
             }
 
-            int size = fireflies.size();
-            if(size == 5){
+            if(this.get_Size() == 5){
                 this.set_isFull();
                 System.out.println("Flacon is now full.\n");
             }else{
-                System.out.println("You have " + size + " fireflies.\n");
+                System.out.println("You have " + this.get_Size() + " fireflies.\n");
             }
         }
     }

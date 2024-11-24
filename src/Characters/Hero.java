@@ -1,7 +1,9 @@
 package Characters;
 
 import Items.Bag;
+import Items.Flacon;
 import Items.Item;
+import Items.Net;
 import Locations.Room;
 
 import java.util.List;
@@ -48,59 +50,46 @@ public class Hero extends Character {
         System.out.println("You have " + this.gold + " gold.");
     }
 
-    public boolean isCollectable(String nameItem){
-        return(nameItem.equals("PublicNotice")||nameItem.equals("Warning")||nameItem.equals("Mosaic"));
-    }
 
     public void takeItemFromRoom(Room room, String nameItem) {
         List<Item> items = room.getItems();
-        if(!isCollectable(nameItem)) {   // l'item n'est pas une PublicNotice
-            if (this.getBag() == null) {  // l'utilisateur n'a pas de sac
-                if (nameItem.equals("Bag")) { // si l'item à ajouter est un sac
-                    boolean foundBag = false;
-                    for (Item item : items) {    // on cherche si la pièce à un item Bag
-                        if (item instanceof Bag) {
-                            this.setBag((Bag) item);
-                            room.removeItem(item);
-                            foundBag = true;
-                            break;
-                        }
-                    }
-                    if (!foundBag) { // il n'y a pas de sac dans la pièce
-                        System.out.println("There is no bag here !");
-                    }
-                } else { // l'item à ajouter n'est pas un sac et il n'a pas de sac
-                    System.out.println("You need a bag to add item.");
-                }
-            } else {  //l'utilisateur a un sac
-                boolean foundItem = false;
-                for (Item item : items) { // on cherche si l'item à ajouter est dans la pièce
-                    if (Objects.equals(item.getName(), nameItem)) {
-                        if (this.getBag().addItem(item)) { // l'item a bien été ajouté
-                            room.removeItem(item);  // on supprime l'item de la pièce
-                        }   //else pas d'ajout -> la fonction addItem renvoie le problème (capacity)
-                        foundItem = true;
+
+        if (this.getBag() == null) {  // l'utilisateur n'a pas de sac
+            if (nameItem.equals("Bag")) { // si l'item à ajouter est un sac
+                boolean foundBag = false;
+                for (Item item : items) {    // on cherche si la pièce à un item Bag
+                    if (item instanceof Bag) {
+                        this.setBag((Bag) item);
+                        room.removeItem(item);
+                        foundBag = true;
                         break;
                     }
                 }
-                if (!foundItem) {  // l'item n'est pas dans la pièce
-                    System.out.println("This room dont have this item.");
+                if (!foundBag) { // il n'y a pas de sac dans la pièce
+                    System.out.println("There is no bag here!");
                 }
+            } else { // l'item à ajouter n'est pas un sac et il n'a pas de sac
+                System.out.println("You need a bag to add item.");
             }
-        }else{ // l'item à ajouter est une publicNotice
-            boolean foundNotice = false;
-            for (Item item : items) { // on cherche si la notice est dans la pièce
-                if (Objects.equals(item.getName(), nameItem)) {
-                    item.printDescription();    // affiche la notice
-                    foundNotice = true;
-                    break;
+        } else {  //l'utilisateur a un sac
+            Item item = room.getItem(nameItem);
+            if(item != null){ // l'item est dans la pièce
+                if(!nameItem.equals("Firefly")){
+                    if (this.getBag().addItem(item)) { // bool isAdd
+                        room.removeItem(item);  // on supprime l'item de la pièce si ajout
+                    }
+                }else{  // l'item à prendre est une luciole
+                    if(this.getBag().haveItem("Net")){
+                        Net net = (Net) this.getBag().getItem("Net");
+                        net.Catch((Flacon) this.getBag().getItem("Flacon"));
+                    }else{
+                        System.out.println("You need a net to catch some fireflies.");
+                    }
                 }
-            }
-            if (!foundNotice) {  // cette Notice n'est pas dans la pièce
-                System.out.println("This room dont have this item.");
+            }else{  // l'item n'est pas dans la pièce
+                System.out.println("This room don't have this item.");
             }
         }
-
     }
 
     public boolean haveWeapon(){

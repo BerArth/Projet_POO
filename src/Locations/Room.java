@@ -93,7 +93,7 @@ public class Room {
                 }
             }
         }else{
-            System.out.println("OH NO, you don't have weapon");
+            System.out.println("OH NO, you don't have a weapon.");
             while (true){
                 hero.attack(boss);
                 System.out.println(boss.getNAME() + " take " + hero.getStrength() + " damage!");

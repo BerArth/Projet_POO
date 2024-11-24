@@ -80,7 +80,7 @@ public class Main {
         //Items
         Bag bag = new Bag("Bag", 100, "It's just a simple bag!");
         Book history = new Book("History", 25, "You can just read the title <<History of gold mining>>, by squinting your eyes, you can guess some characters and a name : ... 3 Caesar \n");
-        Net net = new Net("Net", 105, "It's a simple net with very tiny mesh.");
+        Net net = new Net("Net", 5, "It's a simple net with very tiny mesh.");
         Flacon flacon = new Flacon("Flacon", 20, "It's just a flacon with a pierced cap.");
         Weapon pickaxe = new Weapon("Pickaxe", 50, 50, "This pickaxe seems very sturdy. But it seems that it's not dust but blood that there is. There appears to be blood on the metal.");
         Food bread = new Food("Bread", 10, 50, "A generous slice of bread!");
@@ -400,7 +400,7 @@ public class Main {
                 }
                 else
                 {
-                    System.out.println("Il n'y a pas de sortie dans cette direction");
+                    System.out.println("There is no exit in this direction.");
                 }
 
                 if(currentRoom.haveBosse()){
@@ -417,7 +417,7 @@ public class Main {
                 DoorExit exit = currentRoom.getExit(direction);
 
                 switch (exit) {
-                    case null -> System.out.println("Il n'y a pas de porte dans cette direction !");
+                    case null -> System.out.println("There is no door in this direction.");
                     case DoorWithKeyExit keyDoor -> {
 
                         Key key = (Key) hero.getBag().getItem("Key");
@@ -429,7 +429,7 @@ public class Main {
                         secretDoor.unlock(code);
                     }
                     case AutoLockDoorExit lockDoor -> lockDoor.unlock();
-                    default -> System.out.println("Pas besoins de clé");
+                    default -> System.out.println("You don't need a key.");
                 }
             }
             else if(startsWithIgnoreCase(command,"OPEN "))
@@ -438,7 +438,7 @@ public class Main {
                 DoorExit exit = currentRoom.getExit(direction);
 
                 if (exit == null) {
-                    System.out.println("Il n'y a pas de porte dans cette direction !");
+                    System.out.println("There is no door in this direction.");
                 } else {
                     exit.open();
                 }
