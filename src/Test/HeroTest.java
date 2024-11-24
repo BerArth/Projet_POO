@@ -65,6 +65,7 @@ public class HeroTest {
         assertTrue(room.getItems().contains(net)); // l'item est toujours dans la pièce
     }
 
+    @Test
     public void testTakeItemFromRoom_ItemWithBag() {
         room.addItem(net);
         hero.setBag((Bag) bag);
@@ -73,6 +74,7 @@ public class HeroTest {
         assertFalse(room.getItems().contains(net)); // l'item n'est plus dans la pièce
     }
 
+    @Test
     public void testTakeItemFromRoom_FireflyWithoutNetWithBag() {
         room.addItem(firefly);
         hero.setBag((Bag) bag);
@@ -80,6 +82,7 @@ public class HeroTest {
         assertNull(hero.getBag().getItem("Firefly"));
     }
 
+    @Test
     public void testTakeItemFromRoom_FireflyWithNetWithBag() {
         room.addItem(firefly);
         hero.setBag((Bag) bag);
