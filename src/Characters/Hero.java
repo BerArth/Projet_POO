@@ -75,7 +75,7 @@ public class Hero extends Character {
             Item item = room.getItem(nameItem);
             if(item != null){ // l'item est dans la pièce
                 if(!nameItem.equals("Firefly")){
-                    if (this.getBag().addItem(item)) { // bool isAdd
+                    if(this.getBag().addItem(item)) { // bool isAdd
                         room.removeItem(item);  // on supprime l'item de la pièce si ajout
                     }
                 }else{  // l'item à prendre est une luciole

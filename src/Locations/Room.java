@@ -61,9 +61,9 @@ public class Room {
         items.remove(item);
     }
 
-    public boolean haveBosse(){
+    public boolean haveBoss(){
         if(getChara() instanceof Boss){
-            System.out.println("This room have a bosse");
+            System.out.println("This room have a boss.");
             return true;
         }else{
             return false;
@@ -136,4 +136,9 @@ public class Room {
             return found;
         }
     }
+
+    public void addItem(Item item){
+        items.add(item);
+    }
+
 }

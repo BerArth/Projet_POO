@@ -403,7 +403,7 @@ public class Main {
                     System.out.println("There is no exit in this direction.");
                 }
 
-                if(currentRoom.haveBosse()){
+                if(currentRoom.haveBoss()){
                     boss.speek();
                     System.out.println("Start combat");
                     System.out.println("Boss health : " + boss.getHp() + "\n" + "Hero life : " + hero.getHp());
