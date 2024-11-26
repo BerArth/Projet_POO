@@ -49,40 +49,40 @@ public class Hero extends Character {
     }
 
 
-public void takeItemFromRoom(Room room, String nameItem) {
-    Item item = room.getItem(nameItem);
-    if (this.getBag() == null) {  // l'utilisateur n'a pas de sac
-        boolean foundBag = false;
-        if (nameItem.equals("Bag")) { // si l'item à ajouter est un sac
-            foundBag = true;
-            this.setBag((Bag) item);
-            room.removeItem(item);
-        }
-        else { // l'item à ajouter n'est pas un sac et il n'a pas de sac
-            System.out.println("You need a bag to add item.");
-        }
-    } else {  //l'utilisateur a un sac
-        if(item != null){ // l'item est dans la pièce
-            if(!nameItem.equals("Firefly") && !nameItem.equals("Gold")){
-                if(this.getBag().addItem(item)) { // bool isAdd
-                    room.removeItem(item);  // on supprime l'item de la pièce si ajout
-                }
-            }else{  // l'item à prendre est une luciole
-                if(this.getBag().haveItem("Net")){
-                    Net net = (Net) this.getBag().getItem("Net");
-                    net.Catch((Flacon) this.getBag().getItem("Flacon"));
-                }else{
-                    System.out.println("You need a net to catch some fireflies.");
-                }
-
-                if(this.getBag().haveItem("Pickaxe")){
-                    this.getBag().addItem(item);
-                }
+    public void takeItemFromRoom(Room room, String nameItem) {
+        Item item = room.getItem(nameItem);
+        if (this.getBag() == null) {  // l'utilisateur n'a pas de sac
+            if (nameItem.equals("Bag")) { // si l'item à ajouter est un sac
+                this.setBag((Bag) item);
+                room.removeItem(item);
             }
-        }else{  // l'item n'est pas dans la pièce
-            System.out.println("This room don't have this item.");
+            else {  // l'item à ajouter n'est pas un sac et il n'a pas de sac
+                System.out.println("You need a bag to add item.");
+            }
+        } else {  //l'utilisateur a un sac
+            if(item != null){ // l'item est dans la pièce
+                if(!nameItem.equals("Firefly") && !nameItem.equals("Gold")) {
+                    if (!nameItem.equals("Bag")) {
+                        if (this.getBag().addItem(item)) { // bool isAdd
+                            System.out.println("You added item to the bag.");
+                            room.removeItem(item);  // on supprime l'item de la pièce si ajout
+                        }
+                    }
+                }else{  // l'item à prendre est une luciole
+                    if(this.getBag().haveItem("Net")){
+                        Net net = (Net) this.getBag().getItem("Net");
+                        net.Catch((Flacon) this.getBag().getItem("Flacon"));
+                    }else{
+                        System.out.println("You need a net to catch some fireflies.");
+                    }
+                    if(this.getBag().haveItem("Pickaxe")){
+                        this.getBag().addItem(item);
+                    }
+                }
+            }else{  // l'item n'est pas dans la pièce
+                System.out.println("This room don't have this item.");
+            }
         }
-    }
     }
 
     public boolean haveWeapon(){

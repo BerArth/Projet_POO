@@ -23,7 +23,7 @@ public class Net extends Item{
         Random randNum = new Random();
         Scanner scanner = new Scanner(System.in);
 
-        if(randNum.nextInt(10) < 5){  // 1/2 success
+        //if(randNum.nextInt(10) < 5){  // 1/2 success
             int r = randNum.nextInt(1, 6); // catch between 1 & 6 firefly
             if(r == 1){
                 System.out.println("Well done, you catch a firefly.\n");
@@ -44,9 +44,9 @@ public class Net extends Item{
             }else{
                 System.out.println("The fireflies are now free.\n");
             }
-        }
+        /*}
         else{  // fail
             System.out.println("You failed, you didn't catch any firefly.\n");
-        }
+        }*/
     }
 }

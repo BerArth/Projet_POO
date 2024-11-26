@@ -6,6 +6,7 @@ import Characters.Hero;
 import Doors.DoorExit;
 import Items.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,23 +127,28 @@ public class Room {
     public Item getItem(String name){
         boolean isfound = false;
         Item found = null;
-        for(Item item : items){
-            if(item.getName().equals(name)){
-                isfound = true;
-                found =  item;
-                break;
+        if (this.items == null) { // liste vide
+            this.items = new ArrayList<>();
+        }else {
+            for (Item item : items) {
+                if (item.getName().equals(name)) {
+                    return item;
+                }
             }
         }
-        if(!isfound){
-            System.out.println("Item " + name + " not found!");
-            return null;
-        }else{
-            return found;
-        }
+
+        System.out.println("Item " + name + " not found!");
+        return null;
     }
 
+
     public void addItem(Item item){
-        items.add(item);
+        if(this.items == null){
+            this.items = new ArrayList<Item>();
+            this.items.add(item);
+        }else{
+            this.items.add(item);
+        }
     }
 
 }
