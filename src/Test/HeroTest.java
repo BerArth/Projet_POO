@@ -1,4 +1,4 @@
-/*
+
 package Test;
 
 import Characters.Hero;
@@ -99,4 +99,3 @@ public class HeroTest {
         assertNull(hero.getBag().getItem("NonExistentItem")); // l'item ne doit pas apparaitre dans l'inventaire
     }
 }
-*/

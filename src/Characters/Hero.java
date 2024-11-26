@@ -6,8 +6,6 @@ import Items.Item;
 import Items.Net;
 import Locations.Room;
 
-import java.util.List;
-import java.util.Objects;
 
 public class Hero extends Character {
 

@@ -25,6 +25,10 @@ public abstract class Item {
         System.out.println(this.name);
     }
 
+    public int getWeight(){
+        return this.weight;
+    }
+
     public void printDescription(){
         System.out.println(this.description);
     }

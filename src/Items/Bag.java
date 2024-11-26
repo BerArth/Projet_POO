@@ -52,7 +52,6 @@ public class Bag extends Item {
         }
     }
 
-
     public boolean addItem(Item item){
         if(this.capacity + item.weight <= this.MAX_CAPACITY){
             this.capacity += item.weight;
@@ -69,9 +68,9 @@ public class Bag extends Item {
         if(this.items.contains(item)){
             this.capacity -= item.weight;
             this.items.remove(item);
-            System.out.println(item.getName() + "has been removed from your bag.");
+            System.out.println(item.getName() + " has been removed from your bag.");
         }else{
-            System.out.println(item.getName() + "is actually not in your bag.");
+            System.out.println(item.getName() + " is actually not in your bag.");
         }
     }
 
