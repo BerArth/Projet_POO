@@ -125,7 +125,7 @@ public class Main {
         Boss boss = new Boss("Foreman", FOREMAN_SPEACH);
         Hero hero = new Hero("Michel", "Hello!");
         Retailer blacksmith = new Retailer("Ragnard the blacksmith", BLACKSMITH_SPEACH);
-        blacksmith.addInventory(new Key("Key"), List.of(new KeyPart("KeyTemple1"), new KeyPart("KeyMine2"), new KeyPart("KeyIsland3")));
+        blacksmith.addInventory(new Key(), List.of(new KeyPart("KeyTemple1"), new KeyPart("KeyMine2"), new KeyPart("KeyIsland3")));
         Retailer shopkeeper = new Retailer("Herbert", HERBERT_SPEACH);
         shopkeeper.addInventory(new Net("Flacon",20, "It's just a flacon with a pierced cap."), List.of(new Gold()));
 
@@ -318,7 +318,7 @@ public class Main {
         mineG.addExit(exitToMineExp);
         mineG.addExit(exitToCaveL);
 
-        Room currentRoom = squareN;
+        Room currentRoom = store;
         Bag bagTest = new Bag("BagForTest", 200, "testbag");
         hero.setBag(bagTest);
         hero.getBag().addItem(pickaxe);

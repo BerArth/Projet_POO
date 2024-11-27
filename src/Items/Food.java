@@ -3,15 +3,15 @@ import Characters.Character;
 
 public class Food extends Item{
 
-    private int heal;
+    private final int HEAL;
 
     public Food(String name, int weight, int heal, String description) {
         super(name, weight, description);
-        this.heal = heal;
+        this.HEAL = heal;
     }
 
-    public int getHeal(){
-        return this.heal;
+    public int getHEAL(){
+        return this.HEAL;
     }
 
     public void heal(Character character) {
@@ -21,7 +21,7 @@ public class Food extends Item{
         }else{
             character.attack(this.Damage);
         }*/
-        character.restorePv(this.heal);
+        character.restorePv(this.HEAL);
     }
 
 }

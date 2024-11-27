@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 public class Retailer extends Character{
 
-    private Map<Item, List<Item>> inventory;
+    private final Map<Item, List<Item>> inventory;
 
-    public Retailer(String name, String speach){
-        super(name, 1, 0, speach);
+    public Retailer(String name, String speech){
+        super(name, 1, 0, speech);
         this.inventory = new HashMap<>();
     }
 
