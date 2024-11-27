@@ -125,13 +125,12 @@ public class Room {
     }
 
     public Item getItem(String name){
-        boolean isfound = false;
-        Item found = null;
-        if (this.items == null) { // liste vide
+        if (this.items == null){ // liste vide
             this.items = new ArrayList<>();
-        }else {
-            for (Item item : items) {
-                if (item.getName().equals(name)) {
+        }
+        else{
+            for (Item item : items){
+                if (item.getName().equals(name)){
                     return item;
                 }
             }
