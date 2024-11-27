@@ -74,16 +74,6 @@ public class Bag extends Item {
         }
     }
 
-    public List<KeyPart> getKeyParts(){
-        List<KeyPart> keyParts = new ArrayList<>();
-        for(Item item : items){
-            if(item instanceof KeyPart){
-                keyParts.add((KeyPart) item);
-            }
-        }
-        return keyParts;
-    }
-
     public Weapon getWeapon(){
         Weapon found = null;
         for(Item item : items){
@@ -106,6 +96,14 @@ public class Bag extends Item {
 
     public boolean haveItem(String name){
         return this.items.contains(this.getItem(name));
+    }
+
+    public boolean haveItems(List<Item> items){
+        return this.items.containsAll(items);
+    }
+
+    public void removeItems(List<Item> items) {
+        this.items.removeAll(items);
     }
 
     public void printItems(){

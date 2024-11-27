@@ -6,7 +6,7 @@ public class Exit extends DoorExit{
 
     public Exit(String name, Room direction){
         super(name, direction);
-        super.open();
+        this.setOpen(true);
     }
 
     @Override

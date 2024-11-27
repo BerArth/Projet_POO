@@ -69,14 +69,19 @@ public class Hero extends Character {
                         }
                     }
                 }else{  // l'item à prendre est une luciole
-                    if(this.getBag().haveItem("Net")){
-                        Net net = (Net) this.getBag().getItem("Net");
-                        net.Catch((Flacon) this.getBag().getItem("Flacon"));
-                    }else{
-                        System.out.println("You need a net to catch some fireflies.");
-                    }
-                    if(this.getBag().haveItem("Pickaxe")){
-                        this.getBag().addItem(item);
+                    if(nameItem.equals("Firefly")){
+                        if(this.getBag().haveItem("Net")){
+                            Net net = (Net) this.getBag().getItem("Net");
+                            net.Catch((Flacon) this.getBag().getItem("Flacon"));
+                        }else{
+                            System.out.println("You need a net to catch some fireflies.");
+                        }
+                    }else {
+                        if(this.getBag().haveItem("Pickaxe")){
+                            this.getBag().addItem(item);
+                        }else{
+                            System.out.println("You need a pickaxe.");
+                        }
                     }
                 }
             }else{  // l'item n'est pas dans la pièce

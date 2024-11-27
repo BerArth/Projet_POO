@@ -1,18 +1,17 @@
 package Characters;
 
-import java.sql.SQLOutput;
-import java.util.Objects;
-
 public abstract class Character {
 
     protected final String NAME;
     protected int hp;
     protected int strength;
     protected final String SPEACH;
+    protected final int MAX_HP;
 
     public Character(String name, int hp, int strength, String speach) {
         this.NAME = name;
         this.hp = hp;
+        this.MAX_HP = hp;
         this.strength = strength;
         this.SPEACH = speach;
     }
@@ -26,8 +25,7 @@ public abstract class Character {
         return this.strength;
     }
 
-    public void speek(){
-        System.out.println("je parle");
+    public void speak(){
         System.out.println(SPEACH);
     }
 
@@ -35,23 +33,27 @@ public abstract class Character {
     public void reducePv(int damage){
         if(this.hp > 0){
             this.hp -= damage;
-        }else{
+            if(this.hp < 0){
+                this.hp = 0;
+            }
+        }
+        else{
             System.out.println("The target is already dead.");
         }
     }
 
     public boolean isDead(){
-        return (this.getHp() <= 0);
+        return (this.getHp() == 0);
     }
 
 
     public void restorePv(int heal){
         if(this.hp > 0){
-            /* // dans le cas où on a un maxHP pour ne pas heal plus que le max
-            if(this.hp + heal > this.maxHP){
-                this.hp = this.maxHP;
-            }else {*/
-            this.hp += heal;
+            if(this.hp + heal > this.MAX_HP){
+                this.hp = this.MAX_HP;
+            }else {
+                this.hp += heal;
+            }
         }else{
             System.out.println("The target is dead.");
         }

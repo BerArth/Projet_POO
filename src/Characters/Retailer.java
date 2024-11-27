@@ -2,14 +2,12 @@ package Characters;
 
 import Items.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Retailer extends Character{
 
-    private Map<Item, Integer> inventory;
+    private Map<Item, List<Item>> inventory;
 
     public Retailer(String name, String speach){
         super(name, 1, 0, speach);
@@ -21,7 +19,7 @@ public class Retailer extends Character{
         System.out.println("Im " + this.getNAME() + " I can't attack!");
     }
 
-    public void addInventory(Item item, int price){
+    public void addInventory(Item item, List<Item> price){
         this.inventory.put(item, price);
     }
 
@@ -31,49 +29,41 @@ public class Retailer extends Character{
         }
     }
 
-    public void displayInventory(){
+    public void displayInventory() {
         System.out.println(this.getNAME() + " Inventory:");
-        for(Map.Entry<Item, Integer> entry : inventory.entrySet()){
-            System.out.println(entry.getKey().getName() + " - " + entry.getValue());
+        for (Map.Entry<Item, List<Item>> entry : inventory.entrySet()) {
+            String prices = entry.getValue().stream()
+                    .map(Item::getName)
+                    .collect(Collectors.joining(", "));
+            System.out.println(entry.getKey().getName() + " - Exchange for: " + prices);
         }
     }
 
-    public void sellItem(Item item, Hero buyer){
-        if(inventory.containsKey(item)){
-            int price = inventory.get(item);
-
-            if(buyer.getGold() >= price){
-                if(buyer.getBag() != null){
-                    buyer.removeGold(price);
-                    buyer.getBag().addItem(item);
-                    inventory.remove(item);
-                    System.out.println("You have buy " + item.getName() + "!");
-                }else{
-                    System.out.println("You don't have bag!");
-                }
-            }else{
-                System.out.println("You don't have enough gold!");
+    public void Trade(Hero hero, String itemName){
+        Item itemToTrade = null;
+        for(Item item : inventory.keySet()){
+            if(item.getName().equals(itemName)){
+                itemToTrade = item;
+                break;
             }
-        }else {
-            System.out.println(item.getName() + " does not exist!");
         }
-    }
 
-    public void exchangeKeyPart(Hero hero){
-        Bag bag = hero.getBag();
-        List<KeyPart> keyParts = bag.getKeyParts();
-
-        if(keyParts.size() < 4){
-            System.out.println("You don't have enough key parts!");
-        }else{
-            for(int i = 0; i < 4; i++){
-                bag.removeItem(keyParts.get(i));
-            }
-
-            Key key = new Key(Set.of(1,2,3,4), "A part of a key, it must take several to get the complete key.");
-            bag.addItem(key);
-            System.out.println("You have exchange your 4 key parts!");
+        if(itemToTrade == null){
+            System.out.println("Sorry, " + itemName + " doesn't exist!");
+            return;
         }
-    }
 
+        List<Item> requiredItems = inventory.get(itemToTrade);
+
+        if(!hero.getBag().haveItems(requiredItems)){
+            System.out.println("Sorry, you don't have the required items!");
+            return;
+        }
+
+        hero.getBag().removeItems(requiredItems);
+        hero.getBag().addItem(itemToTrade);
+        removeInventory(itemToTrade);
+
+        System.out.println("Trade successful! You received: " + itemToTrade.getName());
+    }
 }

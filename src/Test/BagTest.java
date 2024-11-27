@@ -29,7 +29,7 @@ public class BagTest {
         hero = new Hero("Luc", "I am Hero");
         item1 = new Food("Bread", 5, 30, "A part of bread");
         item2 = new Book("Book", 10, "Just a book");
-        keyPart = new KeyPart(2);
+        keyPart = new KeyPart("testKey");
         weapon = new Weapon("Pickaxe", 20, 20, "Just a pickaxe");
 
         System.setOut(new PrintStream(outContent));
@@ -83,12 +83,41 @@ public class BagTest {
     }
 
     @Test
-    public void testGetKeyPart(){
+    public void testGetWeapon(){
         bag.addItem(item1);
-        bag.addItem(keyPart);
+        bag.addItem(weapon);
 
-        List<KeyPart> keyParts = bag.getKeyParts();
-        assertEquals(1, keyParts.size());
-        assertTrue(keyParts.contains(keyPart));
+        Weapon foundWeapon = bag.getWeapon();
+        assertNotNull(foundWeapon);
+        assertEquals(weapon, foundWeapon);
+    }
+
+    @Test
+    public void getItem(){
+        bag.addItem(item1);
+        Item foundItem = bag.getItem("Bread");
+        assertNotNull(foundItem);
+        assertEquals(item1, foundItem);
+        assertNull(bag.getItem("item"));
+    }
+
+    @Test
+    public void testHaveItem(){
+        bag.addItem(item1);
+        assertTrue(bag.haveItem("Bread"));
+        assertFalse(bag.haveItem("item"));
+    }
+
+    @Test
+    public void testPrintItems(){
+        bag.printItems();
+        assertTrue(outContent.toString().contains("There is no item in your bag."));
+
+        outContent.reset();
+
+        bag.addItem(item1);
+        bag.printItems();
+        assertTrue(outContent.toString().contains("Items in your bag:"));
+        assertTrue(outContent.toString().contains(item1.getName()));
     }
 }

@@ -1,5 +1,7 @@
 package Items;
 
+import java.util.Objects;
+
 public abstract class Item {
 
     protected String name;
@@ -32,4 +34,15 @@ public abstract class Item {
     public void printDescription(){
         System.out.println(this.description);
     }
+
+
+    //mandatory for the retailer otherwise the haveitem will not work
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Item item = (Item) obj;
+        return name.equals(item.name);
+    }
+
 }

@@ -85,7 +85,6 @@ public class Main {
     private static final String BAG = "It's juste a simple bag!";
     private static final String HISTORY = "You can just read the title <<History of gold mining>>,by squinting your eyes, you can guess some characters : 1110101";
     private static final String NET = "It's a simple net with very tiny mesh.";
-    private static final String FLACON = "It's just a flacon with a pierced cap.";
     private static final String PICKAXE = "This pickaxe seems very sturdy.\nThere appears to be blood on the metal.";
     private static final String BREAD = "A generous slice of bread!";
     private static final String FIREFLY = "An insect that is active during the night and whose tail produces light\n-\nCambridge Dicrionary";
@@ -105,7 +104,7 @@ public class Main {
     private static final String WARNING = "Access to the mine only for workers.\nRelatives, please wait outside\nNotice to the workers: Don't forget to listen to the cuckoo.";
 
     public static void help(){
-        System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK");
+        System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK\n -SPEAK");
     }
     public static boolean startsWithIgnoreCase(String input, String prefix){
         if (input.length() < prefix.length()) {
@@ -126,13 +125,15 @@ public class Main {
         Boss boss = new Boss("Foreman", FOREMAN_SPEACH);
         Hero hero = new Hero("Michel", "Hello!");
         Retailer blacksmith = new Retailer("Ragnard the blacksmith", BLACKSMITH_SPEACH);
+        blacksmith.addInventory(new Key("Key"), List.of(new KeyPart("KeyTemple1"), new KeyPart("KeyMine2"), new KeyPart("KeyIsland3")));
         Retailer shopkeeper = new Retailer("Herbert", HERBERT_SPEACH);
+        shopkeeper.addInventory(new Net("Flacon",20, "It's just a flacon with a pierced cap."), List.of(new Gold()));
 
         //Items
         Bag bag = new Bag("Bag", 100, BAG);
         Book history = new Book("History", 25, HISTORY);
         Net net = new Net("Net", 5, NET);
-        Flacon flacon = new Flacon("Flacon", 20, FLACON);
+
         Weapon pickaxe = new Weapon("Pickaxe", 50, 50, PICKAXE);
         Food bread = new Food("Bread", 10, 50, BREAD);
         Firefly firefly = new Firefly("Firefly", 3, FIREFLY);
@@ -141,9 +142,9 @@ public class Main {
         PublicNotice minesWarning = new PublicNotice("Warning", 3000, WARNING);
         Gold gold = new Gold();
 
-        KeyPart keyTemple1 = new KeyPart(1);
-        KeyPart keyMine2 = new KeyPart(2);
-        KeyPart keyIsland3 = new KeyPart(3);
+        KeyPart keyTemple1 = new KeyPart("KeyTemple1");
+        KeyPart keyMine2 = new KeyPart("KeyMine2");
+        KeyPart keyIsland3 = new KeyPart("KeyIsland3");
 
         //List items for room
         List<Item> itemsTemple = new ArrayList<>();
@@ -243,8 +244,7 @@ public class Main {
         Exit exitToCaveStl = new Exit("Stalactite cave", caveStl);
         Exit exitToSpring = new Exit("Underground spring", spring);
 
-        Set<Integer> requiredParts = Set.of(1,2,3);
-        DoorWithKeyExit exitToOutside = new DoorWithKeyExit("Fountain", outside, requiredParts);
+        DoorWithKeyExit exitToOutside = new DoorWithKeyExit("Fountain", outside);
 
         SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("Square north", squareN, 666);
         SecretCodeDoorExit exitToBoat = new SecretCodeDoorExit("Boat", boat, 666);
@@ -255,6 +255,7 @@ public class Main {
         squareN.addExit(exitToTemple);
         squareN.addExit(exitToSquareE);
         squareN.addExit(exitToSquareW);
+        squareN.addExit(exitToOutside);
 
         squareS.addExit(exitToAlleyS);
         squareS.addExit(exitToStore);
@@ -318,7 +319,14 @@ public class Main {
         mineG.addExit(exitToCaveL);
 
         Room currentRoom = squareN;
-        System.out.println(MOSAIC);
+        Bag bagTest = new Bag("BagForTest", 200, "testbag");
+        hero.setBag(bagTest);
+        hero.getBag().addItem(pickaxe);
+        hero.getBag().addItem(keyTemple1);
+        hero.getBag().addItem(keyMine2);
+        hero.getBag().addItem(keyIsland3);
+        hero.getBag().addItem(gold);
+        blacksmith.Trade(hero, "Key");
 
         System.out.println("***********************************************");
 
@@ -333,6 +341,9 @@ public class Main {
                 break;
             }
 
+            if(currentRoom == outside){
+                System.out.println(currentRoom.getDescription() + "\nEnter QUIT for quit the game!");
+            }
 
             System.out.print("> ");
             String command = scanner.nextLine().trim();
@@ -377,9 +388,9 @@ public class Main {
 
             }
 
-            if(command.equalsIgnoreCase("SPEEK")) {
+            if(command.equalsIgnoreCase("SPEAK")) {
                 if(currentRoom.getChara() != null){
-                    currentRoom.getChara().speek();
+                    currentRoom.getChara().speak();
                     if(currentRoom.getChara() instanceof Helper){
                         System.out.println("You want a clue ? ");
                         System.out.print("> ");
@@ -388,9 +399,25 @@ public class Main {
                             Helper helper = (Helper) currentRoom.getChara();
                             helper.giveClue();
                         }
+                    }else if(currentRoom.getChara() instanceof Retailer){
+                        ((Retailer) currentRoom.getChara()).displayInventory();
                     }
                 }else{
                     System.out.println("You're alone, do you like talking to yourself?");
+                }
+            }
+
+            if(command.equalsIgnoreCase("TRADE")){
+                if(currentRoom.getChara() != null){
+                    if(currentRoom.getChara() instanceof Retailer){
+                        System.out.println("Enter the name of the desired item:");
+                        String desiredItem = scanner.nextLine().trim();
+                        ((Retailer) currentRoom.getChara()).Trade(hero, desiredItem);
+                    }else {
+                        System.out.println("you need a retailer to exchange your items");
+                    }
+                }else{
+                    System.out.println("You're alone, you want to trade with the wind?");
                 }
             }
 
@@ -423,6 +450,9 @@ public class Main {
                     {
                         System.out.println(direction + " is closed");
                     }
+                    else {
+                        currentRoom = exit.getDirection();
+                    }
                 }
                 else
                 {
@@ -430,7 +460,7 @@ public class Main {
                 }
 
                 if(currentRoom.haveBoss()){
-                    boss.speek();
+                    boss.speak();
                     System.out.println("Start combat");
                     System.out.println("Boss health : " + boss.getHp() + "\n" + "Hero life : " + hero.getHp());
                     currentRoom.fight(boss, hero);
@@ -445,7 +475,7 @@ public class Main {
                 switch (exit) {
                     case null -> System.out.println("There is no door in this direction.");
                     case DoorWithKeyExit keyDoor -> {
-
+                        System.out.println("je suis la");
                         Key key = (Key) hero.getBag().getItem("Key");
                         keyDoor.unlock(key);
                     }

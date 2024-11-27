@@ -7,11 +7,9 @@ import java.util.Set;
 
 public class DoorWithKeyExit extends AutoLockDoorExit {
 
-    private final Set<Integer> requiredParts;
 
-    public DoorWithKeyExit(String name, Room direction, Set<Integer> requiredParts) {
+    public DoorWithKeyExit(String name, Room direction) {
         super(name, direction);
-        this.requiredParts = requiredParts;
     }
 
     @Override
@@ -21,20 +19,10 @@ public class DoorWithKeyExit extends AutoLockDoorExit {
 
 
     public void unlock(Key key){
-        if(key != null && key.getKeyParts().containsAll(requiredParts)){
+        if(key != null) {
             super.unlock();
-        }else {
+        }else{
             System.out.println("We need key for unlock this door");
         }
     }
-
-
-
-    @Override
-    public String toString() {
-        return "Class = " + this.getClass().getSimpleName()
-                + ", open = " + isOpen()
-                + ", locked = " + isLocked();
-    }
-
 }
