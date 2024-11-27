@@ -13,41 +13,96 @@ public class Main {
     private static final String BLACKSMITH_SPEACH = "Hey friend! \nIt seems that you need my blacksmithing skills to obtain a complete key. \nBring me the key parts and I'll help you.";
     private static final String HERBERT_SPEACH = "Welcome to my humble shop. \nSince the city is close, I don't have many products. I can just sell you a glass flacon.";
 
-    private static final String SQUAREN = "";
-    private static final String SQUARES = "";
-    private static final String SQUAREW = "";
-    private static final String SQUAREE = "";
-    private static final String OUTSIDE = "";
+    private static final String SQUAREN = """
+            You are to the north of the square.\s
+               \s
+            In front of you you can see a small rusty gate that leads to the cemetery and a huge building.\s
+               \s
+            This building is built directly into the stone. At the top of its door you can read TEMPLE:\s
+               \s
+            To acquire knowledge, one must study;\s
+            To acquire wisdom, one must observe.
+               \s
+            
+            Behind you you can hear the water fall from the fountain.""";
 
-    private static final String SAGE_ROOM = "";
-    private static final String TEMPLE = "";
-    private static final String STATUE = "";
-    private static final String CEMETERY = "";
+    private static final String SQUARES = """
+            You are to the south of the square.
+               \s
+            There is Herbert's shop and right next to it a small and dark alley.
+               \s
+            Behind you you can hear the water fall from the fountain.""";
 
-    private static final String LIBRARY = "";
-    private static final String ALLEYW = "";
-    private static final String HOUSE = "";
+    private static final String SQUAREW = """
+            You are to the west of the square.\s
+               \s
+            There's a lot of noise here. On one side of an alley you have the blacksmith, and on the other side you have the tavern.
+               \s
+            Behind you you can hear the water fall from the fountain.""";
 
-    private static final String STORE = "";
-    private static final String ALLEYS = "";
+    private static final String SQUAREE = """
+            You are to the east of the square.\s
+               \s
+            This is you'r favorite place to be. Just in front of the alley to outside of the earth. You can see your house and the library.\s
+               \s
+            Behind you you can hear the water fall from the fountain.""";
 
-    private static final String CAVEL = "";
-    private static final String ISLAND = "";
-    private static final String CAVESTL = "";
-    private static final String SPRING = "";
-    private static final String BOAT = "";
+    private static final String OUTSIDE = "Finally released!";
 
-    private static final String ALLEYE = "";
-    private static final String SMITHY = "";
-    private static final String TAVERN = "";
+    private static final String SAGE_ROOM = "You are now in a quiet place. Kneeling on a carpet, an old man drinks his tea.";
+    private static final String TEMPLE = "You are in the temple. It's huge room covered in mosaic. In the center of the room is a giant statue of Gaia.";
+    private static final String STATUE = "Wow, the inside of the statue is completely covered with gold.";
+    private static final String CEMETERY = """
+            You are in the cemetery, The graves are lined up next to each other.\s
+               \s
+            Flowers don't grow here, so it's hard to honor the dead that way.""";
 
-    private static final String MINEABD = "";
-    private static final String MINEEXP = "";
-    private static final String MINEG = "";
-    private static final String GALLERYS = "";
-    private static final String GALLERYN = "";
-    private static final String GALLERYM = "";
-    private static final String MINEENT = "";
+    private static final String LIBRARY = "The interior of this library is very sad, only a few books rest on the dusty shelves.";
+    private static final String ALLEYW = "You are in the west alley. At the end of the path there is a gate but it is completely blocked by rocks.";
+    private static final String HOUSE = "You are in your house";
+
+    private static final String STORE = "You are in the store. Strangely, the store is empty. Behind the counter waits the seller.";
+    private static final String ALLEYS = "You are in the south alley. It's a dark alley.";
+
+    private static final String CAVEL = "Wow, you're in a cave with lots of fireflies lighting up the vault. It's wonderful.";
+    private static final String ISLAND = "You are on the island. You can see the shore of the cave.\nMoored to the land there is the boat.";
+    private static final String CAVESTL = "You are surrounded by stalactites and stalagmites.\nImpossible to get out of here.";
+    private static final String SPRING = "At your feet flows an underground spring.\nAt this point it forms like a lake with an island in the center.\nMoored to the land there is a boat.";
+    private static final String BOAT = "You are on the boat in the middle of the water.\nOn one side there is the shore of the cave, on the other the island.";
+
+    private static final String ALLEYE = "You are in the east alley. It's a dark alley, like a chimney flue.";
+    private static final String SMITHY = "You are at the blacksmith's. It is very hot and the noise from the forge is deafening.";
+    private static final String TAVERN = "You are in the tavern. Apart from a half-unconscious drunk man there is no one there.";
+
+    private static final String MINEABD = "Cuck-oo, cuck-oo, cuck-oo\nThis mine is clearly abandoned";
+    private static final String MINEEXP = "Cuck-oo, cuck-oo, cuck-oo\nYou are in the exploited part of the mine.\nIf you stay here, you're going to have to work with others. Move on.";
+    private static final String MINEG = "Cuck-oo, cuck-oo, cuck-oo\nThis is the famous gold mine.";
+    private static final String GALLERYS = "This is a simple gallery. There is nobody.";
+    private static final String GALLERYN = "Cuck-oo, cuck-oo, cuck-oo\nNothing here.";
+    private static final String GALLERYM = "Cuck-oo, cuck-oo, cuck-oo\nYou are in the main gallery.";
+    private static final String MINEENT = "Cuck-oo, cuck-oo, cuck-oo\nYou are at the entrance to the mine. There is a warning sign.";
+
+    private static final String BAG = "It's juste a simple bag!";
+    private static final String HISTORY = "You can just read the title <<History of gold mining>>,by squinting your eyes, you can guess some characters : 1110101";
+    private static final String NET = "It's a simple net with very tiny mesh.";
+    private static final String FLACON = "It's just a flacon with a pierced cap.";
+    private static final String PICKAXE = "This pickaxe seems very sturdy.\nThere appears to be blood on the metal.";
+    private static final String BREAD = "A generous slice of bread!";
+    private static final String FIREFLY = "An insect that is active during the night and whose tail produces light\n-\nCambridge Dicrionary";
+    private static final String MOSAIC = """
+            
+            ..........     ..........     .
+                     .     .              .
+                     .     .              .
+                     .     .              .
+            ..........     ..........     .
+            .              .         .    .
+            .              .         .    .
+            .              .         .    .
+            ..........     ..........     .
+            """;
+    private static final String PUBLICNOTICE = "Public Notice :\n Due to a collapse access to the outside of the earth is no impossible.\n The sage revealed to us that another door to the outside still exist.\nWe call on all citizens to find this door and open it.\nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor";
+    private static final String WARNING = "Access to the mine only for workers.\nRelatives, please wait outside\nNotice to the workers: Don't forget to listen to the cuckoo.";
 
     public static void help(){
         System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK");
@@ -74,16 +129,16 @@ public class Main {
         Retailer shopkeeper = new Retailer("Herbert", HERBERT_SPEACH);
 
         //Items
-        Bag bag = new Bag("Bag", 100, "It's just a simple bag!");
-        Book history = new Book("History", 25, "You can just read the title <<History of gold mining>>, by squinting your eyes, you can guess some characters and a name : ... 3 Caesar \n");
-        Net net = new Net("Net", 5, "It's a simple net with very tiny mesh.");
-        Flacon flacon = new Flacon("Flacon", 20, "It's just a flacon with a pierced cap.");
-        Weapon pickaxe = new Weapon("Pickaxe", 50, 50, "This pickaxe seems very sturdy. But it seems that it's not dust but blood that there is. There appears to be blood on the metal.");
-        Food bread = new Food("Bread", 10, 50, "A generous slice of bread!");
-        Firefly firefly = new Firefly("Firefly", 3, "An insect that is active during the night and whose tail produces light - Cambridge Dicrionary");
-        PublicNotice mosaic = new PublicNotice("Mosaic", 5000, "...");
-        PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, "Public Notice : \n Due to a collapse access to the outside of the earth is now impossible. \n The sage revealed to us that another door to the outside still exist. \nWe call on all citizens to find this door and open it. \nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor");
-        PublicNotice minesWarning = new PublicNotice("Warning", 3000, "Access to the mine only for workers. \nRelatives, please wait outside \nNotice to the workers: Don't forget to listen to the cuckoo");
+        Bag bag = new Bag("Bag", 100, BAG);
+        Book history = new Book("History", 25, HISTORY);
+        Net net = new Net("Net", 5, NET);
+        Flacon flacon = new Flacon("Flacon", 20, FLACON);
+        Weapon pickaxe = new Weapon("Pickaxe", 50, 50, PICKAXE);
+        Food bread = new Food("Bread", 10, 50, BREAD);
+        Firefly firefly = new Firefly("Firefly", 3, FIREFLY);
+        PublicNotice mosaic = new PublicNotice("Mosaic", 5000, MOSAIC);
+        PublicNotice publicNotice = new PublicNotice("PublicNotice", 2000, PUBLICNOTICE);
+        PublicNotice minesWarning = new PublicNotice("Warning", 3000, WARNING);
         Gold gold = new Gold();
 
         KeyPart keyTemple1 = new KeyPart(1);
@@ -262,9 +317,8 @@ public class Main {
         mineG.addExit(exitToMineExp);
         mineG.addExit(exitToCaveL);
 
-        Room currentRoom = house;
-
-
+        Room currentRoom = squareN;
+        System.out.println(MOSAIC);
 
         System.out.println("***********************************************");
 
@@ -296,7 +350,7 @@ public class Main {
                 }else{
                     System.out.println(currentRoom.getDescription());
                     if(currentRoom.getItems() == null ||currentRoom.getItems().isEmpty()){
-                        System.out.println("This room contains no items!");
+                        System.out.println("This room don't contains items!");
                     }else{
                         System.out.println("Item in this room : ");
                         currentRoom.printItems();
@@ -357,21 +411,17 @@ public class Main {
             {
 
                 String direction = command.substring(3);
-                System.out.println(direction);
                 DoorExit exit = currentRoom.getExit(direction);
 
                 if(exit != null)
                 {
                     if(exit instanceof Exit){
                         currentRoom = exit.getDirection();
+                        System.out.println(currentRoom.getDescription());
                     }
                     else if(!exit.isOpen())
                     {
                         System.out.println(direction + " is closed");
-                    }
-                    else
-                    {
-                        currentRoom = exit.getDirection();
                     }
                 }
                 else
