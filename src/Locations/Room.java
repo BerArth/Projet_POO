@@ -80,7 +80,7 @@ public class Room {
     }
 
     public void fight(Boss boss, Hero hero){
-        if(hero.haveWeapon()){
+        if(hero.haveWeaponInBag()){
             Weapon pickaxe = hero.getBag().getWeapon();
             while (true){
                 pickaxe.attack(boss);
