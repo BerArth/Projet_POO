@@ -21,9 +21,26 @@ public class Hero extends Character {
         return this.bag;
     }
 
-    public void setBag(Bag bag) {
-        this.bag = bag;
-        System.out.println("Great ! Now you have a bag!");
+    public void setBag(Bag newBag) {
+        if (this.bag != newBag) {  // Eviter boucle
+            if (this.bag != null) {
+                this.bag.unsetOwner();  // Retirer l'ancien sac
+            }
+
+            this.bag = newBag;  // Définir le nouveau sac
+
+            if (newBag != null && newBag.getOwner() != this) {
+                newBag.setOwner(this);  // Associer le sac au nouveau propriétaire si nécessaire
+            }
+            System.out.println("Great! Now you have a bag!");
+        }
+    }
+
+    public void unsetBag() {
+        if (this.bag != null) {
+            this.bag.unsetOwner();  // Retirer la référence du sac
+        }
+        this.bag = null;  // Supprimer la référence du côté du sac
     }
 
     public int getGold(){
@@ -90,8 +107,11 @@ public class Hero extends Character {
         }
     }
 
-    public boolean haveWeapon(){
-        return this.getBag().haveItem("Pickaxe");
+    public boolean haveWeaponInBag(){
+        if(this.bag != null){
+            return this.getBag().haveItem("Pickaxe");
+        }
+        return false;
     }
 
 }

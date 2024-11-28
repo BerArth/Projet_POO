@@ -34,16 +34,25 @@ public class Bag extends Item {
 //        return items;
 //    }
 
+
     public void setOwner(Hero newOwner) {
+        if (this.owner != newOwner) {  // Eviter boucle
+            if (this.owner != null) {
+                this.owner.unsetBag();  // Retirer l'ancien propriétaire
+            }
+
+            this.owner = newOwner;  // set new owner to the bag
+
+            if (newOwner != null && newOwner.getBag() != this) {
+                newOwner.setBag(this);  // link the bag to the new owner (Hero.Bag = instance)
+            }
+        }
+    }
+    public void unsetOwner() {
         if (this.owner != null) {
-            this.owner.setBag(null);    // remove actual owner
+            this.owner.unsetBag();  // Retirer la référence du côté du propriétaire
         }
-
-        this.owner = newOwner;  // set new owner to the bag
-
-        if(newOwner != null) {
-            newOwner.setBag(this); // link the bag to the new owner
-        }
+        this.owner = null;  // Supprimer la référence du sac
     }
 
     public void printOwner(){
