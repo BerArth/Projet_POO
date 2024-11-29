@@ -372,7 +372,7 @@ public class Main {
                 if(currentRoom.getChara() != null){
                     currentRoom.getChara().speak();
                     if(currentRoom.getChara() instanceof Helper){
-                        System.out.println("You want a clue ? ");
+                        System.out.println("You want a clue ? (yes/no)");
                         System.out.print("> ");
                         String commands = scanner.nextLine().trim();
                         if(commands.equalsIgnoreCase("YES")) {

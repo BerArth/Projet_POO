@@ -18,7 +18,7 @@ public class Helper extends Character {
         if(Objects.equals(this.NAME, "Sage")){
             System.out.println("im sage Take this clue : blablabla");
         }
-        else if(Objects.equals(this.NAME, "drunkard")){
+        else if(Objects.equals(this.NAME, "Reynold the Drunkard")){
             System.out.println("im drunkard Take this clue : blablabla");
         }
         else{

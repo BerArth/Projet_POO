@@ -36,7 +36,7 @@ public class Hero extends Character {
             this.bag = newBag;  // Définir le nouveau sac
 
             if (newBag != null && newBag.getOwner() != this) {
-                newBag.setOwner(this);  // Associer le sac au nouveau propriétaire si nécessaire
+                newBag.setOwner(this);  // Associer le sac au nouveau propriétaire
             }
             System.out.println("Great! Now you have a bag!");
         }
