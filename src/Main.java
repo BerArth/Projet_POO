@@ -2,6 +2,7 @@ import Characters.*;
 import Doors.*;
 import Items.*;
 import Locations.Room;
+import Thread.*;
 
 import java.util.*;
 
@@ -103,8 +104,9 @@ public class Main {
     private static final String PUBLICNOTICE = "Public Notice :\n Due to a collapse access to the outside of the earth is no impossible.\n The sage revealed to us that another door to the outside still exist.\nWe call on all citizens to find this door and open it.\nREWARD : 2000 GOLD BARS and a free beer.\n         Mayor";
     private static final String WARNING = "Access to the mine only for workers.\nRelatives, please wait outside\nNotice to the workers: Don't forget to listen to the cuckoo.";
 
-    public static void help(){
+    public static void help(boolean GameWithCD){
         System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK\n -SPEAK \n -READ \n -TAKE \n -EAT \n -STATE");
+        if(GameWithCD){System.out.println(" -TIME");}
     }
     public static boolean startsWithIgnoreCase(String input, String prefix){
         if (input.length() < prefix.length()) {
@@ -299,10 +301,20 @@ public class Main {
         hero.reducePv(20);
         blacksmith.Trade(hero, "Key");
 
-        System.out.println("***********************************************");
+        System.out.println("\n***********************************************\n");
+        System.out.println("Before it starts, would you like to implements a countdown ?(yes/no)");
+        System.out.print("> ");
 
+        Countdown countdown = new Countdown();
+        String commandCD = scanner.nextLine().trim();
+        boolean GameWithCountdown = commandCD.equalsIgnoreCase("YES");
+        if(GameWithCountdown) {
+            countdown.start();
+        }
+
+        System.out.println("\n***********************************************");
         System.out.println("Welcome in [nom du jeux] !");
-        help();
+        help(GameWithCountdown);
         System.out.println(currentRoom.getDescription());
 
         while(true) {
@@ -310,6 +322,13 @@ public class Main {
             if(hero.isDead()){
                 System.out.println("You are dead, try again!");
                 break;
+            }
+
+            if(GameWithCountdown){
+                if(countdown.getTimeRemaining() <= 0){
+                    System.out.println("Time is over, you lose!");
+                    break;
+                }
             }
 
             if(currentRoom == outside){
@@ -323,8 +342,13 @@ public class Main {
                 System.out.println("Thank's for playing! Goodbye!");
                 break;
             }
+            if (command.equalsIgnoreCase("TIME") && GameWithCountdown) {
+                if(countdown.isAlive()){
+                    countdown.TimeRemaining();
+                }
+            }
             if(command.equalsIgnoreCase("HELP")){
-                help();
+                help(GameWithCountdown);
             }
             if(command.equalsIgnoreCase("LOOK")){
                 if(Objects.equals(currentRoom.getName(), "Underground Spring")){
@@ -495,6 +519,9 @@ public class Main {
 
         }//end while
 
+        if(GameWithCountdown){
+            countdown.Stop();
+        }
 
     }
 
