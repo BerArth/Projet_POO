@@ -60,11 +60,14 @@
 
 12. **STATE**
     - Affiche l'état actuel de la santé de votre personnage.
+    
+13. **TIME**
+    - Affiche le temps restant pour les parties avec un compte à rebours.
 
-13. **QUIT**
+14. **QUIT**
     - Pour quitter le jeu à tout moment.
 
-14. Autres : Certaines interactions dans le jeu demandent une réponse simple sous forme de "yes" ou "no". Par exemple, lorsque vous êtes invité à confirmer une action ou une décision, vous pouvez répondre en tapant :
+15. Autres : Certaines interactions dans le jeu demandent une réponse simple sous forme de "yes" ou "no". Par exemple, lorsque vous êtes invité à confirmer une action ou une décision, vous pouvez répondre en tapant :
     - yes pour accepter ou continuer l'action.
     - no pour refuser ou annuler l'action.
 
@@ -105,6 +108,10 @@ Square west
 
 ...
 ```
+
+### Compte à rebours
+
+>Si vous avez accepté de jouer avec un compte à rebours alors, vous aurez 20 minutes pour terminer la partie.
 
 ### Combats
 
