@@ -52,12 +52,10 @@
 9. OPEN [direction]
     - Ouvre une porte ou une sortie dans la direction spécifiée, si celle si n'est pas vérrouillé.
 
-10. TRADE
-
-11. QUIT
+10. QUIT
     - Pour quitter le jeu à tout moment.
 
-12. autre : Certaines interactions dans le jeu demandent une réponse simple sous forme de "yes" ou "no". Par exemple, lorsque vous êtes invité à confirmer une action ou une décision, vous pouvez répondre en tapant :
+11. autre : Certaines interactions dans le jeu demandent une réponse simple sous forme de "yes" ou "no". Par exemple, lorsque vous êtes invité à confirmer une action ou une décision, vous pouvez répondre en tapant :
     - yes pour accepter ou continuer l'action.
     - no pour refuser ou annuler l'action.
 

@@ -11,14 +11,20 @@ public class Hero extends Character {
 
     private int gold;
     private Bag bag = null;
+    private final int MAX_HP;
 
     public Hero(String name, String speach){
         super(name, 100, 5, speach);
         this.gold = 0;
+        this.MAX_HP = 100;
     }
 
     public Bag getBag(){
         return this.bag;
+    }
+
+    public int getMAX_HP() {
+        return MAX_HP;
     }
 
     public void setBag(Bag newBag) {
@@ -96,6 +102,7 @@ public class Hero extends Character {
                     }else {
                         if(this.getBag().haveItem("Pickaxe")){
                             this.getBag().addItem(item);
+                            room.removeItem(item);
                         }else{
                             System.out.println("You need a pickaxe.");
                         }

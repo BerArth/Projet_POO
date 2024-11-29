@@ -104,7 +104,7 @@ public class Main {
     private static final String WARNING = "Access to the mine only for workers.\nRelatives, please wait outside\nNotice to the workers: Don't forget to listen to the cuckoo.";
 
     public static void help(){
-        System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK\n -SPEAK");
+        System.out.println("Controls :\n -GO [Name of exit]\n -UNLOCK [Name of exit]\n -OPEN [Name of exit]\n -HELP\n -QUIT\n -INVENTORY\n -LOOK\n -SPEAK \n -READ \n -TAKE \n -EAT \n -STATE");
     }
     public static boolean startsWithIgnoreCase(String input, String prefix){
         if (input.length() < prefix.length()) {
@@ -117,7 +117,6 @@ public class Main {
     public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
-
 
         //Characters
         Helper sage = new Helper("Sage", SAGE_SPEACH);
@@ -146,72 +145,43 @@ public class Main {
         KeyPart keyMine2 = new KeyPart("KeyMine2");
         KeyPart keyIsland3 = new KeyPart("KeyIsland3");
 
-        //List items for room
-        List<Item> itemsTemple = new ArrayList<>();
-        itemsTemple.add(mosaic);
-        List<Item> itemsStatue = new ArrayList<>();
-        itemsStatue.add(keyTemple1);
-        List<Item> itemsCemetry = new ArrayList<>();
-        itemsCemetry.add(pickaxe);
-        List<Item> itemsSquareW = new ArrayList<>();
-        itemsSquareW.add(net);
-        List<Item>  itemsLibrary = new ArrayList<>();
-        //itemsLibrary.add(book);
-        List<Item> itemsLalleyW = new ArrayList<>();
-        itemsLibrary.add(publicNotice);
-        List<Item> itemsHouse = new ArrayList<>();
-        itemsHouse.add(bag);
-        List<Item> itemsCavel = new ArrayList<>();
-        itemsCavel.add(firefly);
-        List<Item> itemsIsland = new ArrayList<>();
-        itemsIsland.add(keyIsland3);
-        List<Item> itemsMineAbd = new ArrayList<>();
-        itemsMineAbd.add(keyMine2);
-        List<Item> itemsEnt = new ArrayList<>();
-        itemsEnt.add(minesWarning);
-        List<Item> itemsTavern = new ArrayList<>();
-        itemsTavern.add(bread);
-        List<Item> itemsMineG = new ArrayList<>();
-        itemsMineG.add(gold);
-
         //Room
         //Square
         Room squareN = new Room("Square",SQUAREN, null, null);
         Room squareS = new Room("Square",SQUARES, null, null);
-        Room squareW = new Room("Square",SQUAREW, null, itemsSquareW);
+        Room squareW = new Room("Square",SQUAREW, null, new ArrayList<>(List.of(net)));
         Room squareE = new Room("Square",SQUAREE, null, null);
         Room outside = new Room("Outside", OUTSIDE, null, null);
         //North
         Room sageRoom = new Room("Sage's Room", SAGE_ROOM, sage, null);
-        Room temple = new Room("Temple", TEMPLE, null, itemsTemple);
-        Room statue = new Room("Statue", STATUE, null, itemsStatue);
-        Room cemetery = new Room("Cemetery", CEMETERY, null, itemsCemetry);
+        Room temple = new Room("Temple", TEMPLE, null, new ArrayList<>(List.of(mosaic)));
+        Room statue = new Room("Statue", STATUE, null, new ArrayList<>(List.of(keyTemple1)));
+        Room cemetery = new Room("Cemetery", CEMETERY, null, new ArrayList<>(List.of(pickaxe)));
         //West
-        Room library = new Room("Library", LIBRARY, null, itemsLibrary);
-        Room alleyW = new Room("Alley", ALLEYW, null, itemsLalleyW);
-        Room house = new Room("House", HOUSE,null, itemsHouse);
+        Room library = new Room("Library", LIBRARY, null, new ArrayList<>(List.of(history)));
+        Room alleyW = new Room("Alley", ALLEYW, null, new ArrayList<>(List.of(publicNotice)));
+        Room house = new Room("House", HOUSE,null, new ArrayList<>(List.of(bag)));
         //South
         Room store = new Room("Store",STORE, shopkeeper, null);
         Room alleyS = new Room("Alley", ALLEYS, null, null);
         //Cave
-        Room caveL = new Room("Light Cave", CAVEL, null, itemsCavel);
-        Room island = new Room("Island", ISLAND, null, itemsIsland);
+        Room caveL = new Room("Light Cave", CAVEL, null, new ArrayList<>(List.of(firefly)));
+        Room island = new Room("Island", ISLAND, null, new ArrayList<>(List.of(keyIsland3)));
         Room caveStl = new Room("Stalactite Cave", CAVESTL, null, null);
         Room spring = new Room("Underground Spring", SPRING, null, null);
         Room boat = new Room("Boat", BOAT, null, null);
         //East
-
         Room alley = new Room("Alley", ALLEYE, null, null);
         Room smithy = new Room("Smithy", SMITHY, blacksmith, null);
-        Room tavern = new Room("Tavern", TAVERN, drunkard, itemsTavern);
+        Room tavern = new Room("Tavern", TAVERN, drunkard, new ArrayList<>(List.of(bread)));
         //Mine
-        Room mineAbd = new Room("Abandoned Mine", MINEABD, null, itemsMineAbd);
+        Room mineAbd = new Room("Abandoned Mine", MINEABD, null, new ArrayList<>(List.of(keyMine2)));
         Room mineExp = new Room("Exploited Mine", MINEEXP, null, null);
-        Room mineG = new Room("Gold Mine", MINEG, null, itemsMineG); //gestion de l'or????
+        Room mineG = new Room("Gold Mine", MINEG, null, new ArrayList<>(List.of(gold)));
         Room galleryS = new Room("South Gallery", GALLERYS, null, null);
         Room galleryN = new Room("North Gallery", GALLERYN, null, null);
         Room galleryM = new Room("Main Gallery", GALLERYM, boss, null);
-        Room mineEnt = new Room("Mine Entrance", MINEENT, null, itemsEnt);
+        Room mineEnt = new Room("Mine Entrance", MINEENT, null, new ArrayList<>(List.of(minesWarning)));
 
         //exit
         Exit exitToSageRoom = new Exit("Sage's room", sageRoom);
@@ -318,7 +288,7 @@ public class Main {
         mineG.addExit(exitToMineExp);
         mineG.addExit(exitToCaveL);
 
-        Room currentRoom = store;
+        Room currentRoom = tavern;
         Bag bagTest = new Bag("BagForTest", 200, "testbag");
         hero.setBag(bagTest);
         hero.getBag().addItem(pickaxe);
@@ -326,6 +296,7 @@ public class Main {
         hero.getBag().addItem(keyMine2);
         hero.getBag().addItem(keyIsland3);
         hero.getBag().addItem(gold);
+        hero.reducePv(20);
         blacksmith.Trade(hero, "Key");
 
         System.out.println("***********************************************");
@@ -388,6 +359,15 @@ public class Main {
 
             }
 
+            if(command.equalsIgnoreCase("READ")){
+                if(hero.getBag().haveItem("History")){
+                    Item baghistory = hero.getBag().getItem("History");
+                    System.out.println(baghistory.getDescription());
+                }else{
+                    System.out.println("You need a book for read!");
+                }
+            }
+
             if(command.equalsIgnoreCase("SPEAK")) {
                 if(currentRoom.getChara() != null){
                     currentRoom.getChara().speak();
@@ -405,6 +385,19 @@ public class Main {
                 }else{
                     System.out.println("You're alone, do you like talking to yourself?");
                 }
+            }
+
+            if(command.equalsIgnoreCase("EAT")){
+                if(hero.getBag().haveItem("Bread")){
+                    Food food = (Food) hero.getBag().getItem("Bread");
+                    food.heal(hero);
+                }else{
+                    System.out.println("You need food for eat!");
+                }
+            }
+
+            if(command.equalsIgnoreCase("STATE")){
+                System.out.println("Health : " + hero.getHp() + "/" + hero.getMAX_HP());
             }
 
             if(command.equalsIgnoreCase("TRADE")){

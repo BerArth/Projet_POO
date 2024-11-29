@@ -19,6 +19,15 @@ public class Retailer extends Character{
         System.out.println("Im " + this.getNAME() + " I can't attack!");
     }
 
+    public Map<Item, List<Item>> getInventory() {
+
+        Map<Item, List<Item>> inventoryCopy = new HashMap<>();
+        for (Map.Entry<Item, List<Item>> entry : this.inventory.entrySet()) {
+            inventoryCopy.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+        }
+        return inventoryCopy;
+    }
+
     public void addInventory(Item item, List<Item> price){
         this.inventory.put(item, price);
     }

@@ -81,4 +81,10 @@ public class CharacterTest {
         assertEquals(195, target.getHp());
     }
 
+    @Test
+    public void testPrintStateHp() {
+        character.printStateHp();
+        assertTrue(outContent.toString().contains(character.getNAME() +" have: " + character.getHp() + " HP.\n"));
+    }
+
 }
