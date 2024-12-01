@@ -355,7 +355,6 @@ public class Main {
                     System.out.println("Available exits :");
                     for (String direction : currentRoom.getExits().keySet())
                     {
-                        DoorExit exit = currentRoom.getExits().get(direction);
                         System.out.println("- " + direction);
                     }
 
