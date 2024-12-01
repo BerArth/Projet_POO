@@ -1,8 +1,8 @@
-# [Nom du Jeu]
+# The underground adventure
 
 ## Description
 
-    Bienvenue dans [Nom du Jeu], un jeu d'aventure textuel où vous incarnez un héros qui explore des pièces, résout des énigmes et affronte des ennemis dans un monde mystérieux.
+    Bienvenue dans The underground adventure, un jeu d'aventure textuel où vous incarnez un héros qui explore des pièces, résout des énigmes et affronte des ennemis dans un monde mystérieux.
 
 ## Prérequis
 

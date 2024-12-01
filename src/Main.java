@@ -290,16 +290,7 @@ public class Main {
         mineG.addExit(exitToMineExp);
         mineG.addExit(exitToCaveL);
 
-        Room currentRoom = tavern;
-        Bag bagTest = new Bag("BagForTest", 200, "testbag");
-        hero.setBag(bagTest);
-        hero.getBag().addItem(pickaxe);
-        hero.getBag().addItem(keyTemple1);
-        hero.getBag().addItem(keyMine2);
-        hero.getBag().addItem(keyIsland3);
-        hero.getBag().addItem(gold);
-        hero.reducePv(20);
-        blacksmith.Trade(hero, "Key");
+        Room currentRoom = house;
 
         System.out.println("\n***********************************************\n");
         System.out.println("Before it starts, would you like to implements a countdown ?(yes/no)");
@@ -313,7 +304,7 @@ public class Main {
         }
 
         System.out.println("\n***********************************************");
-        System.out.println("Welcome in [nom du jeux] !");
+        System.out.println("Welcome in The underground adventure !");
         help(GameWithCountdown);
         System.out.println(currentRoom.getDescription());
 
