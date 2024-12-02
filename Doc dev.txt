@@ -1,0 +1,30 @@
+Légende du Diagramme de Classes UML : 
+	- Package (Rectangle avec onglet) :
+		- Regroupe plusieurs classes.
+		- Les packages sont utilisés pour organiser le modèle en sous-systèmes ou fonctionnalités.
+
+	- Classe (Rectangle) :
+		- Représente une entité ou un objet dans le système.
+		- Divisée en trois sections : nom de la classe, attributs et méthodes.
+
+	- Héritage (Flèche blanche avec triangle plein) :
+		- Indique une relation d'héritage entre une classe parent et une classe enfant.
+		- La flèche pointe vers la classe parent.
+	
+	- Association unidirectionnelle (Flèche simple) : 
+		- Indique une relation où une classe connaît l'existence d'une autre classe et peut interagir avec elle. 
+		- La flèche pointe vers la classe cible (la classe avec laquelle elle interagit). 
+
+	- Agrégation (Ligne avec losange vide) :
+		- Indique une relation d'agréation où une classe est constituée de plusieurs instances d'une autre classe.
+		- Le losange vide est du côté de l'agrégat (le tout/conteneur).
+
+	- Composition (Ligne avec losange plein) :
+		- Indique une relation de composition plus forte où une classe est strictement constituée de plusieurs instances d'une autre classe.
+		-Le losange plein est du côté du composite (le tout/conteneur).
+
+	- Définitions des Multiplicités :
+		- 1 : Exactement une instance.
+		- 0..1 : Zéro ou une instance.
+		- 0..* : Zéro ou plusieurs instances.
+		- 1..* : Une ou plusieurs instances.
