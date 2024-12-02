@@ -1,9 +1,7 @@
-package Doors;
+package Exit;
 
 import Items.*;
 import Locations.Room;
-
-import java.util.Set;
 
 public class DoorWithKeyExit extends AutoLockDoorExit {
 

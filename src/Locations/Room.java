@@ -3,7 +3,7 @@ package Locations;
 import Characters.Boss;
 import Characters.Character;
 import Characters.Hero;
-import Doors.DoorExit;
+import Exit.DoorExit;
 import Items.*;
 
 import java.util.ArrayList;

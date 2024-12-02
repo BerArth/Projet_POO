@@ -1,4 +1,4 @@
-package Doors;
+package Exit;
 
 import Locations.Room;
 

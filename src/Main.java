@@ -1,5 +1,5 @@
 import Characters.*;
-import Doors.*;
+import Exit.*;
 import Items.*;
 import Locations.Room;
 import Thread.*;
@@ -212,7 +212,6 @@ public class Main {
         Exit exitToCaveL = new Exit("Light cave", caveL);
         Exit exitToIsland = new Exit("Island", island);
 
-        //pour le moment juste des exits
         Exit exitToCaveStl = new Exit("Stalactite cave", caveStl);
         Exit exitToSpring = new Exit("Underground spring", spring);
 
@@ -223,6 +222,7 @@ public class Main {
         SecretCodeDoorExit exitToMineAbd = new SecretCodeDoorExit("Abandoned mine", mineAbd, 666);
         SecretCodeDoorExit exitToStatue = new SecretCodeDoorExit("Statue", statue, 666);
 
+        //Add some exit to a room
         squareN.addExit(exitToCemetery);
         squareN.addExit(exitToTemple);
         squareN.addExit(exitToSquareE);
@@ -290,7 +290,8 @@ public class Main {
         mineG.addExit(exitToMineExp);
         mineG.addExit(exitToCaveL);
 
-        Room currentRoom = house;
+        //init the current room (the spawn of Hero)
+        Room currentRoom = squareN;
 
         System.out.println("\n***********************************************\n");
         System.out.println("Before it starts, would you like to implements a countdown ?(yes/no)");
