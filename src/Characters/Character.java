@@ -19,7 +19,6 @@ public abstract class Character {
     public int getHp() {
         return this.hp;
     }
-    public void setHp(int hp) { this.hp = hp; }
     public String getNAME() { return this.NAME; }
     public int getStrength(){
         return this.strength;

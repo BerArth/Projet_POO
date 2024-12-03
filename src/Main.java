@@ -471,7 +471,7 @@ public class Main {
                     boss.speak();
                     System.out.println("Start combat");
                     System.out.println("Boss health : " + boss.getHp() + "\n" + "Hero life : " + hero.getHp());
-                    currentRoom.fight(boss, hero);
+                    currentRoom.fight(currentRoom.getBoss(), hero);
                 }
 
             }

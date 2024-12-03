@@ -2,7 +2,6 @@ package Exit;
 
 import Locations.Room;
 
-import java.util.*;
 
 public class DoorExit {
 
@@ -46,10 +45,5 @@ public class DoorExit {
                 + ", open = " + isOpen();
     }
 
-    public void printDoorList(List<? extends DoorExit> dl){
-        for(DoorExit d : dl){
-            System.out.println(d);
-        }
-    }
 }
 
