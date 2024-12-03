@@ -217,8 +217,8 @@ public class Main {
 
         DoorWithKeyExit exitToOutside = new DoorWithKeyExit("Fountain", outside);
 
-        SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("Square north", squareN, 52);
-        SecretCodeDoorExit exitToBoat = new SecretCodeDoorExit("Boat", boat, 666);
+        SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("Square north", squareN, 42);
+        SecretCodeDoorExit exitToBoat = new SecretCodeDoorExit("Boat", boat, 1946);
         SecretCodeDoorExit exitToMineAbd = new SecretCodeDoorExit("Abandoned mine", mineAbd, 117);
         SecretCodeDoorExit exitToStatue = new SecretCodeDoorExit("Statue", statue, 261);
 
@@ -291,7 +291,7 @@ public class Main {
         mineG.addExit(exitToCaveL);
 
         //init the current room (the spawn of Hero)
-        Room currentRoom = squareN;
+        Room currentRoom = sageRoom;
 
         System.out.println("\n***********************************************\n");
         System.out.println("Before it starts, would you like to implements a countdown ?(yes/no)");
