@@ -217,10 +217,10 @@ public class Main {
 
         DoorWithKeyExit exitToOutside = new DoorWithKeyExit("Fountain", outside);
 
-        SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("Square north", squareN, 666);
+        SecretCodeDoorExit exitTempleToSquareN = new SecretCodeDoorExit("Square north", squareN, 52);
         SecretCodeDoorExit exitToBoat = new SecretCodeDoorExit("Boat", boat, 666);
-        SecretCodeDoorExit exitToMineAbd = new SecretCodeDoorExit("Abandoned mine", mineAbd, 666);
-        SecretCodeDoorExit exitToStatue = new SecretCodeDoorExit("Statue", statue, 666);
+        SecretCodeDoorExit exitToMineAbd = new SecretCodeDoorExit("Abandoned mine", mineAbd, 117);
+        SecretCodeDoorExit exitToStatue = new SecretCodeDoorExit("Statue", statue, 261);
 
         //Add some exit to a room
         squareN.addExit(exitToCemetery);
