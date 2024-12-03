@@ -14,7 +14,7 @@
 ### Démarrer le jeu
 
     1. Télécharger le code source, disponible à l'adresse git suivante : https://github.com/BerArth/Projet_POO.git
-    2. Compilez et exécutez le jeu en lançant la classe principale (main.java)
+    2. Compilez (avec la commande javac Main.java) et exécutez (avec la commande java Main) le jeu en lançant la classe principale se trouvant dans le dossier /src/Main.java
 > Le jeu commencera automatiquement et vous serez accueilli par un message de bienvenue.
 
 ### Commandes disponibles

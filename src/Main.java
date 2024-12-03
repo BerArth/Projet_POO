@@ -291,7 +291,7 @@ public class Main {
         mineG.addExit(exitToCaveL);
 
         //init the current room (the spawn of Hero)
-        Room currentRoom = sageRoom;
+        Room currentRoom = squareN;
 
         System.out.println("\n***********************************************\n");
         System.out.println("Before it starts, would you like to implements a countdown ?(yes/no)");
